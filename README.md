@@ -2,7 +2,7 @@
 
 Fine-grained driving commute accessibility for Klang Valley.
 
-**Current status: Stage 0 — Problem Definition.** This repository contains project documentation only. No routing provider, implementation stack, or boundary-generation method has been selected; no working application or performance results exist yet. An open-source release is a future goal.
+**Current status: Stage 1 — Routing & Traffic Data Investigation.** This repository contains documentation and an official-source provider review. TomTom Calculate Route is the conditional technical recommendation for the first pilot; applicable API terms and account access remain unresolved. No working application or measured performance results exist yet. An open-source release is a future goal.
 
 ## The question
 
@@ -26,9 +26,10 @@ V1 estimates accessibility under provider-predicted travel times. It does not es
 | [Project brief](PROJECT_BRIEF.md) | Problem, V1 inputs/outputs, mathematics, non-goals, unknowns, and proposed acceptance criteria. |
 | [Project state](PROJECT_STATE.md) | Current stage, actual progress, separate build/test/understanding/documentation status, and next actions. |
 | [Decisions](DECISIONS.md) | Established requirements, proposed defaults, alternatives, and choices still deferred. |
+| [Routing provider review](docs/research/ROUTING_PROVIDER_REVIEW.md) | Official-source comparison, pricing, material data-use constraints, conditional recommendation, and a small pilot plan. |
 | [Formal project instructions](docs/PROJECT_INSTRUCTIONS.md) | User-supplied staged workflow, engineering rules, and learning requirements. |
 
-The next stage is routing and traffic-data investigation using current official sources. There are no installation or execution instructions yet because no software has been implemented.
+The next work is to resolve the candidate's data-use conditions and complete the learning checkpoint before a small point-to-point prototype. There are no installation or execution instructions yet because no software has been implemented.
 
 ## Development approach
 
