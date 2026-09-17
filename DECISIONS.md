@@ -1,13 +1,13 @@
 # Map Algorithm — Decisions
 
-Updated: 2026-09-17. Stage 0 only.
+Updated: 2026-09-17. Stage 1 research; no implementation.
 
 **Established** means required by the user's formal instructions or Work Mode handoff. **Proposed** means a concrete Stage 0 recommendation that has not yet been validated through implementation or the user's reasoning. **Deferred** means no selection has been made. A documented decision is not evidence that the user has mastered the concept.
 
 ## D001 — Establish the problem before building
 
 - **Status:** Established.
-- **Decision:** Complete Stage 0 documentation only in this work session. Keep the repository as persistent project memory.
+- **Decision:** The initial work session completed Stage 0 documentation only. Keep the repository as persistent project memory and advance sequentially. The user's subsequent instruction to continue permits Stage 1 research.
 - **Alternatives:** Start routing calls immediately; build a frontend first; leave scope only in chat.
 - **Rationale:** The project needs an explicit question, input/output contract, and evaluation targets before technology choices.
 - **Consequence:** No routing code, frontend, model, provider selection, package scaffold, or API calls in Stage 0. The next stage is research.
@@ -70,13 +70,13 @@ Updated: 2026-09-17. Stage 0 only.
 - **Consequence:** Freeze evaluation settings before tuning. Compare query efficiency against a uniform grid. A 30% element reduction is exploratory, not mandatory algorithm selection. The exact criteria and denominators are in `PROJECT_BRIEF.md` C1–C8.
 - **Revisit when:** Stage 1 establishes costs, lawful replay options, and practical domain/resolution. Any change requires a recorded reason; do not adjust targets after seeing results just to claim success.
 
-## D009 — Defer provider and implementation choices
+## D009 — Investigate before committing to a provider
 
-- **Status:** Deferred.
+- **Status:** Initial comparison documented; full V1 selection still conditional. See D011 and the [provider review](docs/research/ROUTING_PROVIDER_REVIEW.md).
 - **Open candidates:** Mapbox, Google Routes, OpenRouteService, Valhalla, OSRM, GraphHopper, and other OpenStreetMap-based options. They are candidates named by the user, not assertions of equivalent traffic support.
-- **Decision still needed:** Select an initial data/routing approach only after Stage 1 evaluates current official documentation for traffic type, time support, Klang Valley coverage, matrix semantics, quality, costs, licensing, route geometry, segment information, and reproducibility.
+- **Decision still needed:** Verify the applicable agreement and account capabilities for the preferred technical candidate, TomTom. Stage 1 has compared it with Mapbox and Google and screened the original open-source candidates. Local routing quality requires a later pilot; documentation cannot establish that result.
 - **Also deferred:** Language/framework, CRS implementation, database, cache lifetime, sampling/refinement method, contour library, test coordinates, and open-source licence.
-- **Consequence:** No implementation or provider research result is implied by this log. Retention, redistribution, and public examples must follow the verified terms of the selected data source.
+- **Consequence:** Provider research is now documented, but no implementation or routing validation has occurred. Retention, redistribution, and public examples must follow the verified terms of the selected data source.
 
 ## D010 — Preserve the developer learning loop
 
@@ -86,8 +86,26 @@ Updated: 2026-09-17. Stage 0 only.
 - **Rationale:** The user is the primary developer and wants an interview-explainable project.
 - **Consequence:** Stage 0 documents can be complete while conceptual mastery remains unverified. No implementation component can inherit an UNDERSTOOD status from a prose draft.
 
+## D011 — Prefer TomTom for the point-to-point pilot, conditionally
+
+- **Status:** Proposed technical selection; not a final full-V1 provider commitment.
+- **Decision:** Prefer TomTom Calculate Route for the first small pilot. Resolve its applicable API agreement and account access before activating the integration. See the [research and pilot plan](docs/research/ROUTING_PROVIDER_REVIEW.md).
+- **Alternatives:** Mapbox Directions, Google Routes, and self-hosted open-source routing engines.
+- **Rationale:** Documented timed routing and Malaysia traffic coverage suit the pilot. Mapbox's current Navigation API storage restriction conflicts with our retained-evidence design; Google also has content-use constraints. TomTom's terms are unresolved, not assumed permissive.
+- **Consequence:** Stage 1 remains open on data-use fit. No account has been created, provider contacted, or paid request authorized. Do not silently remove the brief's evidence requirements or call a static baseline a traffic-aware V1.
+- **Revisit when:** The applicable agreement is available, access/price conditions differ, or the pilot exposes inadequate access/traffic behaviour.
+
+## D012 — Validate individual routes before matrix scaling
+
+- **Status:** Proposed experiment design; not implemented or tested.
+- **Decision:** Plan eight semantic cases from two access points, two departure times, and two directions. Inspect one response before expanding. Proposed cap: 20 attempts including retries; exact points, dates, policy, account allowance, and rate limit remain unset.
+- **Alternatives:** Query a large grid first; begin with a square matrix over every point; rely on a returned duration without inspecting access.
+- **Rationale:** A small route response makes endpoint order, time, units, traffic fields, and entrance access inspectable. Larger matrices can hide these mistakes and consume unnecessary units.
+- **Consequence:** Use synthetic cases for deterministic failure tests and respect verified retention rules for provider results. No API client, cache, sampling algorithm, or frontend is created before the user reasons through the relevant concepts.
+
 ## Change log
 
 | Date | Change | Evidence / consequence |
 | --- | --- | --- |
 | 2026-09-17 | Initialized the Stage 0 decision log. | Based on both identical uploaded instruction copies and the current Work Mode handoff. No previous repository files existed. |
+| 2026-09-17 | Added the Stage 1 comparison and conditional TomTom pilot recommendation. | Official capability/price sources reviewed; current Mapbox Product Terms changed the initial technical preference. TomTom agreement, account access, and local quality remain unresolved. |
