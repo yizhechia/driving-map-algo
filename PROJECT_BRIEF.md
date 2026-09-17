@@ -1,6 +1,6 @@
 # Map Algorithm — Project Brief
 
-Status: Stage 0 specification draft, 2026-09-17. No routing provider, implementation stack, or contour algorithm has been selected. Numerical targets below are proposed acceptance criteria, not achieved results.
+Status: Stage 0 specification with Stage 1 research update, 2026-09-17. TomTom Calculate Route is the preferred technical candidate for a small pilot; full V1 provider selection remains open pending applicable API terms and account access. No implementation stack or contour algorithm has been selected. Numerical targets below are proposed acceptance criteria, not achieved results. See the [provider review](docs/research/ROUTING_PROVIDER_REVIEW.md).
 
 ## 1. Problem statement
 
@@ -43,7 +43,7 @@ This is a logical contract, not an implemented API schema. Names can change when
 | `sampling_config` | Explicit initial coverage, refinement limit, and distance units. A proposed local target is 100 metres in resolved boundary areas; the method and feasible settings are deferred. |
 | `query_budget` | A finite cap on routing elements/attempts and a runtime limit. Monetary estimates, matrix accounting, retries, and feasible default caps must be defined after Stage 1. This document authorizes no paid API calls. |
 
-The selected provider/configuration and run identifier will also be explicit once Stage 1 is complete. Secrets must remain outside committed configuration. Distances for sampling must use a suitable metric calculation; degrees are not metres. A projected CRS or geodesic approach remains undecided. Geographic output positions use longitude, latitude order.
+The selected provider/configuration and run identifier will also be explicit once Stage 1 is complete. The Stage 1 technical recommendation is conditional and does not activate an account or resolve data-use permissions. Secrets must remain outside committed configuration. Distances for sampling must use a suitable metric calculation; degrees are not metres. A projected CRS or geodesic approach remains undecided. Geographic output positions use longitude, latitude order.
 
 ## 4. Precise V1 outputs
 
@@ -142,7 +142,7 @@ Repeated API predictions alone describe prediction variability. They do not esta
 
 ## 7. Major technical unknowns
 
-All items below are UNKNOWN until investigated; no candidate provider's capabilities have been established.
+The [Stage 1 review](docs/research/ROUTING_PROVIDER_REVIEW.md) now confirms several documented capabilities, limits, prices, and restrictions. The questions below remain the investigation register; documented support does not establish local quality or account entitlement. Retained provider evidence and contour export are still conditional on a compatible data-use permission model.
 
 | Unknown | Why it matters | Stage that resolves it |
 | --- | --- | --- |
@@ -187,11 +187,11 @@ Stage 0 creates documentation only:
 | `DECISIONS.md` | Established constraints, proposed defaults, alternatives, consequences, and deferred choices. |
 | `docs/PROJECT_INSTRUCTIONS.md` | Preserved formal instructions supplied by the user; line endings normalized only. |
 
-Future locations are suggestions, not created scaffolding or a selected language/framework:
+Implementation locations below remain suggestions, not created scaffolding or a selected language/framework. The research directory was added during Stage 1:
 
 | Future path | Earliest purpose |
 | --- | --- |
-| `docs/research/` | Stage 1 official-source provider investigation with fact status and access date. |
+| `docs/research/` | Now contains the Stage 1 provider review, with fact status, citations, and access date. |
 | `src/` | Stage 2 point-to-point prototype; later sampling, contours, and a small provider boundary as needed. |
 | `tests/` | Meaningful routing-semantic and algorithm tests alongside implementation. |
 | `examples/` | Reproducible inputs and legally shareable examples after the first prototype. |
@@ -205,6 +205,6 @@ The user is the primary developer. Before each significant implementation: expla
 
 Track BUILT, TESTED, UNDERSTOOD, and DOCUMENTED separately. Explained content does not count as understood, and written acceptance criteria do not count as passing tests.
 
-This turn delivers Stage 0 only. Stage 1 is routing/data investigation; Stages 2–4 build and examine the deterministic engine; Stages 5–6 add reliability and bottleneck work; Stage 7 adds the product UI; Stage 8 broadens evaluation; Stage 9 prepares release. Incremental validation belongs beside implementation even though there is a dedicated later evaluation stage.
+The initial session delivered Stage 0 only. The user's subsequent instruction to continue advanced work to Stage 1 routing/data investigation. Stages 2–4 build and examine the deterministic engine; Stages 5–6 add reliability and bottleneck work; Stage 7 adds the product UI; Stage 8 broadens evaluation; Stage 9 prepares release. Incremental validation belongs beside implementation even though there is a dedicated later evaluation stage.
 
 The uploaded [formal instructions](docs/PROJECT_INSTRUCTIONS.md) and the user's Work Mode handoff govern this draft. New explicit user instructions take precedence. Important new assumptions here are marked as proposed in [DECISIONS.md](DECISIONS.md), and the current learning state is recorded in [PROJECT_STATE.md](PROJECT_STATE.md).
