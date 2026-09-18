@@ -1,6 +1,16 @@
 # Map Algorithm — Project Brief
 
-Status: Stage 0 specification with Stage 1 research update, 2026-09-17. TomTom Calculate Route is the preferred technical candidate for a small pilot; full V1 provider selection remains open pending applicable API terms and account access. No implementation stack or contour algorithm has been selected. Numerical targets below are proposed acceptance criteria, not achieved results. See the [provider review](docs/research/ROUTING_PROVIDER_REVIEW.md).
+Updated: 2026-09-18. A preliminary offline MVP is delivered on main, with recovery history on mvp/offline-commute. Recovered-source CI passed for the offline implementation. The original traffic-aware V1 specification below remains a later target.
+
+## Immediate MVP scope
+
+The user's latest instruction authorizes autonomous implementation and testing, including a local demo, without waiting for comprehension prompts. Model one final planning time as corridor plus local access plus condo overhead plus an adjustable distance allowance. Test alternative sampling methods; expose no additional residence score. Use synthetic, explicitly labelled scenarios until a real traffic provider is verified. See [the model](docs/MVP_MODEL.md), [current state](PROJECT_STATE.md), and [run instructions](README.md).
+
+The distance allowance is a planning assumption rather than a calibrated reliability estimate. The offline model and schematic grid do not complete the original traffic-aware V1 or its C1–C8 criteria. Preserve learning status as unverified until the user demonstrates understanding.
+
+## Original traffic-aware V1 specification
+
+The following requirements and proposed numerical targets are retained for later provider integration. References to future stages concern that product, not the already implemented offline MVP.
 
 ## 1. Problem statement
 

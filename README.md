@@ -1,38 +1,101 @@
-# Map Algorithm
+# Commute Lab
 
-Fine-grained driving commute accessibility for Klang Valley.
+A working offline algorithm MVP for fine-grained commute accessibility, inspired by Klang Valley.
 
-**Current status: Stage 1 — Routing & Traffic Data Investigation.** This repository contains documentation and an official-source provider review. TomTom Calculate Route is the conditional technical recommendation for the first pilot; applicable API terms and account access remain unresolved. No working application or measured performance results exist yet. An open-source release is a future goal.
+**Data:** synthetic road connections, distances and traffic scenarios. This is an inspectable planning model, not a live navigation service or a calibrated reliability forecast.
 
-## The question
+## Run
 
-> Given my workplace, a driving-time limit, a departure time, and a direction, which residential access locations fit my commute constraint?
+Requires Python 3.10 or newer. The application and Python tests have no third-party runtime dependencies.
 
-Two homes on opposite sides of a road can have different access to turns, estate exits, ramps, and congested feeder roads. A suburb label or a distance circle can hide those differences. Home-to-work and work-to-home travel also need separate calculations.
+From the repository root:
 
-## Planned V1
+~~~sh
+python -m commute_map serve
+~~~
 
-- One workplace, one commute threshold, one explicit departure timestamp, one direction, and a bounded Klang Valley study area per run.
-- Traffic-aware point-to-point duration estimates from a provider selected after research.
-- Our own spatial sampling and contour generation, with holes, disconnected regions, and unresolved areas represented honestly.
-- Geographic outputs supported by sampled durations, query settings, cost accounting, and validation evidence.
+Open http://127.0.0.1:8080 in your browser. If that port is occupied, use --port 8081. On Windows, py can replace python. Stop with Ctrl+C. The development server binds only to your own computer.
 
-V1 estimates accessibility under provider-predicted travel times. It does not establish actual journey reliability. Reliability statistics, bottleneck attribution, a polished frontend, and release packaging belong to later stages.
+If you already have the repository checked out:
 
-## Project documents
+~~~sh
+git fetch origin
+git switch main
+git pull --ff-only
+~~~
 
-| Document | Purpose |
+## What it does
+
+- Computes KLCC-to-home and home-to-KLCC separately on a directed graph.
+- Combines main-corridor time, local-road time, home access, and an adjustable distance buffer into one planning time.
+- Includes the user's Sungai Buloh example (30 + 18 = 48 minutes) and Rawang example (35 + 5 = 40 minutes), before buffers.
+- Applies the configurable condo allowance once per home endpoint, initially 5 minutes.
+- Chooses the route with the lowest complete planning time. A farther entrance can win, and changing the buffer can change the preferred entrance.
+- Displays an 8 km major grid with finer 2 km, 1 km or 500 m cells, route details and boundary segments.
+- Supports full, uniform and adaptive sampling. Estimated and unknown cells remain distinguishable.
+- Exports GeoJSON with synthetic provenance, settings and sample status. Eligible cell polygons preserve gaps; no smooth polygon is invented across missing areas.
+
+The distance buffer defaults to **0.2 extra minutes per routed kilometre**, an illustrative assumption. It is not inferred from observations and has no on-time probability attached. Road times already include the selected assumed profile; the extra buffer is an additional planning allowance. The demo does not claim to include every real traffic condition.
+
+## Tests and developer comparison
+
+~~~sh
+python -m unittest discover -s tests -v
+python -m scripts.evaluate
+~~~
+
+The 45-test suite covers the commute examples, directed routing, alternative entrances, condo overhead, changing buffer costs, disconnected points, invalid data, budgets, interpolation, boundary holes, and HTTP requests. An independent Floyd–Warshall reference checks 30 generated graphs.
+
+The algorithm comparison is development evidence, not an extra product scoring system. In the original 18-case synthetic experiment, full scan agreed with all reference cell values; uniform sampling outperformed this particular adaptive method at the same 256-query budget. Full scan is therefore the default for the small available graph. See [the experiment design](docs/evaluation/MVP_EXPERIMENT_PLAN.md) and [verified results](docs/evaluation/MVP_RESULTS.md).
+
+Optional browser tests require Node and Playwright:
+
+~~~sh
+npm install --no-save --package-lock=false playwright@1.58.2
+npx playwright install chromium
+node scripts/browser_smoke.cjs
+~~~
+
+GitHub Actions has passed the recovered source's 45 Python tests, browser interactions, algorithm comparison and package installation. [Verified run](https://github.com/yizhechia/driving-map-algo/actions/runs/35313293512). Browser screenshots, exports and the regenerated evaluation report are saved as workflow artifacts.
+
+## Command-line outputs
+
+~~~sh
+python -m commute_map demo --buffer 0 --output outputs/example.json
+python -m commute_map export --threshold 45 --output outputs/region.geojson
+python -m commute_map demo --direction home_to_work --period morning --method adaptive --budget 256
+~~~
+
+Optional installation: python -m pip install . exposes the commute-map command. Running from the checkout does not require installation or an API key.
+
+## Code map
+
+| File | Purpose |
 | --- | --- |
-| [Project brief](PROJECT_BRIEF.md) | Problem, V1 inputs/outputs, mathematics, non-goals, unknowns, and proposed acceptance criteria. |
-| [Project state](PROJECT_STATE.md) | Current stage, actual progress, separate build/test/understanding/documentation status, and next actions. |
-| [Decisions](DECISIONS.md) | Established requirements, proposed defaults, alternatives, and choices still deferred. |
-| [Routing provider review](docs/research/ROUTING_PROVIDER_REVIEW.md) | Official-source comparison, pricing, material data-use constraints, conditional recommendation, and a small pilot plan. |
-| [Formal project instructions](docs/PROJECT_INSTRUCTIONS.md) | User-supplied staged workflow, engineering rules, and learning requirements. |
+| commute_map/model.py | Validated graph and planning assumptions |
+| commute_map/routing.py | Shared Dijkstra search and route reconstruction |
+| commute_map/scenarios.py | Explicit synthetic fixtures and local access variation |
+| commute_map/sampling.py | Query budget, uniform sampling and adaptive refinement |
+| commute_map/contours.py | Shared-edge cancellation and GeoJSON export |
+| commute_map/app.py | Input validation, computation and explanatory output |
+| commute_map/server.py | Local HTTP server |
+| commute_map/static/ | Interactive demo |
+| tests/ | Concept, reference, geometry and HTTP tests |
+| scripts/ | Algorithm comparison and browser smoke test |
 
-The next work is to resolve the candidate's data-use conditions and complete the learning checkpoint before a small point-to-point prototype. There are no installation or execution instructions yet because no software has been implemented.
+## Limits and project state
 
-## Development approach
+This MVP does not satisfy the original traffic-aware V1. It has no routing-provider integration, measured congestion, verified building entrances, calibrated risk distribution, real turn restrictions, or real street-level validation. Morning/evening selections are static invented profiles, not dated departure-time predictions. GeoJSON uses an illustrative frame near KL; its geometry is not surveyed residential coverage.
 
-The user is the primary developer. Before significant implementation, explain the problem, compare approaches, justify a recommendation, and check understanding. Then implement a small component, test it, and update the repository evidence.
+The viewport is a schematic of a 32 km square. Each cell represents an assumed access point; colouring the whole cell approximates its centre. A fully sampled grid still does not prove every real location inside a cell is reachable.
 
-Keep BUILT, TESTED, UNDERSTOOD, and DOCUMENTED separate. Never commit API keys. Provider data retention, redistribution, and attribution must follow verified terms before data is stored or shared. The project licence will be selected for release; none is asserted by this draft.
+The developer's conceptual understanding remains unverified. The user's latest instruction authorized implementation without waiting for learning prompts; explanations and exercises are retained for review.
+
+- [Project brief](PROJECT_BRIEF.md)
+- [Current state](PROJECT_STATE.md)
+- [Decisions](DECISIONS.md)
+- [Model and learning notes](docs/MVP_MODEL.md)
+- [Provider investigation](docs/research/ROUTING_PROVIDER_REVIEW.md)
+- [Formal instructions](docs/PROJECT_INSTRUCTIONS.md)
+
+The repository remains private; a licence and public release are still future work.
