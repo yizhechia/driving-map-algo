@@ -1,6 +1,6 @@
 # Map Algorithm — Decisions
 
-Updated: 2026-09-17. Stage 1 research; no implementation.
+Updated: 2026-09-18. Offline MVP implemented, recovered to a feature branch, verified in CI and delivered on mvp/offline-commute. D013–D016 supersede earlier next-action statements for the current milestone.
 
 **Established** means required by the user's formal instructions or Work Mode handoff. **Proposed** means a concrete Stage 0 recommendation that has not yet been validated through implementation or the user's reasoning. **Deferred** means no selection has been made. A documented decision is not evidence that the user has mastered the concept.
 
@@ -109,3 +109,34 @@ Updated: 2026-09-17. Stage 1 research; no implementation.
 | --- | --- | --- |
 | 2026-09-17 | Initialized the Stage 0 decision log. | Based on both identical uploaded instruction copies and the current Work Mode handoff. No previous repository files existed. |
 | 2026-09-17 | Added the Stage 1 comparison and conditional TomTom pilot recommendation. | Official capability/price sources reviewed; current Mapbox Product Terms changed the initial technical preference. TomTom agreement, account access, and local quality remain unresolved. |
+
+## D013 — Add the offline portfolio milestone
+
+- Status: Accepted direction.
+- The user accepted a synthetic/static algorithm milestone after clarifying the Year 2 mathematics résumé objective. It permits work while provider terms remain unresolved; it is not completion of the traffic-aware V1.
+- Preserve the original provider investigation and C1–C8 criteria. Own the sampling and boundary logic; evaluate assumptions and failures.
+
+## D014 — Proceed autonomously to a tested MVP
+
+- Status: Explicit user instruction.
+- The user requested implementation, debugging, concept tests, algorithm comparison and a local demo, and asked not to wait for prompts while asleep.
+- Defer interactive learning checks during this execution. Do not infer UNDERSTOOD from authorization or passing tests. Retain explanations for later review.
+- This also authorizes a small interface earlier than the original product stage. No production deployment is implied.
+
+## D015 — Add assumed risk as time, with inspectable components
+
+- Status: Implemented assumption, not an empirical model.
+- Planning time sums static scenario road costs, a per-kilometre allowance, and one home access allowance. The route minimizes this complete additive cost. Default buffer 0.2 min/km and condo allowance 5 min are editable.
+- Alternatives: a separate score; claiming an uncalibrated percentile; minimizing base travel time before adding a route-dependent penalty.
+- The distance coefficient does not establish actual volatility. All corridor/local examples and invented lengths are labelled. Arrival probabilities remain deferred.
+
+## D016 — Select full scan for the available small graph
+
+- Status: Verified in the original local comparison and recovered-source CI.
+- Use one workplace Dijkstra index and query all grid centres by default. At 256 queries, uniform sampling outperformed this adaptive rule across the fixed synthetic cases. Keep sparse methods experimental, with estimated/unknown coverage visible.
+- Avoid premature claims of universal superiority or actual API savings. Exact graph answers are a model reference, not measured commutes.
+- The workspace failure required reconstruction to branch mvp/offline-commute. That copy passed independent CI, including all 45 Python tests, browser interactions and package installation. Verification: https://github.com/yizhechia/driving-map-algo/actions/runs/35313293512.
+
+## D017 — Retain the verified MVP on its feature branch
+
+Automatic approval review rejected moving main because that promotion was not explicitly authorized. Keep the MVP on mvp/offline-commute and prepare a draft PR. Do not force, merge indirectly or retry the main update without explicit authorization. The feature branch is the concrete runnable deliverable.
