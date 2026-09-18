@@ -1,6 +1,6 @@
 # Map Algorithm — Project Brief
 
-Status: **Offline algorithm MVP implemented**, 2026-09-18. Routing, sampling, local demo, exports and automated checks exist. Browser rendering is still unverified. Stage 1 provider research remains incomplete and paused. The original traffic-aware V1 contract in sections 1–8 is retained as a later target; synthetic results do not satisfy it. See [current state](PROJECT_STATE.md), [MVP guide](docs/MVP_GUIDE.md), and [provider review](docs/research/ROUTING_PROVIDER_REVIEW.md).
+Status: **Offline algorithm MVP and bounded static OSM case implemented**, 2026-09-18. Routing, sampling, local demo, exports and automated checks exist. Browser rendering is still unverified. Stage 1 provider research remains incomplete and paused. The original traffic-aware V1 contract in sections 1–8 is retained as a later target; synthetic and static-road results do not satisfy it. See [current state](PROJECT_STATE.md), [MVP guide](docs/MVP_GUIDE.md), [road case](docs/evaluation/KLCC_ROAD_CASE.md), and [provider review](docs/research/ROUTING_PROVIDER_REVIEW.md).
 
 ## Current portfolio MVP
 
@@ -16,7 +16,7 @@ The implementation is Python 3.10+ with no runtime dependencies. It uses a synth
 
 The original portfolio research question remains useful: can adaptive sampling reduce queries at comparable accuracy? The fixed comparison did not favor this adaptive method: at 256 samples uniform mean agreement was 97.82%, adaptive 95.38%. Full scan is the default for the available small graph. These are model comparisons, not real-world traffic accuracy or actual paid-API savings; the [report](docs/evaluation/MVP_RESULTS.md) provides denominators, unresolved predictions and limits.
 
-The planning allowance is not calibrated statistical risk. No claim that it captures every traffic condition, represents P90, or provides an arrival probability is authorized by these examples. Real network data, dated traffic routing, journey observations, public deployment, and licence selection remain future work. A later real-data integration must explicitly distinguish provider road duration from the added planning allowances before evaluating the retained traffic-aware criteria.
+The planning allowance is not calibrated statistical risk. No claim that it captures every traffic condition, represents P90, or provides an arrival probability is authorized by these examples. A separate bounded OSM case now supplies real network geometry, supported access/turn rules and a history-aware index, while using explicitly assumed static speeds. It evaluates road nodes, not verified residential entrances, and deliberately confines paths to the extract. Dated traffic routing, verified entrance access, journey observations, public deployment, and software licence selection remain future work. The bundled OSM database is attributed under ODbL. A later traffic integration must explicitly distinguish provider road duration from the added planning allowances before evaluating the retained traffic-aware criteria.
 
 ## 1. Problem statement
 

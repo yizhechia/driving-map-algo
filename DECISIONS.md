@@ -1,6 +1,6 @@
 # Map Algorithm — Decisions
 
-Updated: 2026-09-18. Offline MVP implemented; current choices and the user-authorized workflow exception are in D014–D018. Earlier entries retain historical rationale. Stage 1 provider research remains open.
+Updated: 2026-09-18. Offline MVP and bounded static OSM case implemented; current choices and the user-authorized workflow exception are in D014–D020. Earlier entries retain historical rationale. Stage 1 provider research remains open.
 
 **Established** means required by the user's instructions, handoff, or an accepted subsequent scope decision. **Proposed** means a recommendation that has not yet been validated through implementation or the user's reasoning. **Deferred** means no selection has been made. A documented decision is not evidence that the user has mastered the concept.
 
@@ -154,6 +154,22 @@ Updated: 2026-09-18. Offline MVP implemented; current choices and the user-autho
 - **Rationale:** The objective is an inspectable algorithm MVP. The available cloud browser cannot access the loopback server; a DOM/canvas test double allows interaction-logic tests against the real API while keeping the rendering gap explicit.
 - **Consequence:** 47 Python tests and 6 JavaScript tests pass. Installation was checked independently. Visual layout and native browser downloads remain unverified, so UI TESTED remains PARTIAL. Invalid huge numbers and stale settings/export races have regression coverage. No publication, account setup or public exposure was added.
 
+## D019 — Add a frozen bounded OSM case, keep its assumptions explicit
+
+- **Status:** Implemented and checked after the user's continuation request.
+- **Decision:** Bundle an attributed ODbL road snapshot around KLCC/Jalan Tun Razak, with a source timestamp, exact Overpass query and checksums. Evaluate retained road nodes at fixed assumed class speeds plus the existing distance allowance. Keep the synthetic UI separate; expose the road case through the CLI, point GeoJSON and a reproducible report.
+- **Alternatives:** Remain entirely synthetic; require a commercial traffic account; silently treat nearby road nodes as verified home entrances; infer a residential contour from unvalidated access.
+- **Rationale:** Real geometry tests directional/local-access behavior while preserving offline reproducibility and avoiding a traffic-quality claim. The chosen 10-minute threshold fits this small local experiment; it does not replace the original V1's 45-minute example.
+- **Consequence:** 12,645 retained nodes and 20,106 directed segments. No heading or building overhead at endpoints. Routes are deliberately bounded by the extract; outside detours, actual entrance validation and live times remain unresolved. Counts depend on OSM node density. The 74 m nearby-node illustration is exploratory, not held out. Source data has an explicit licence; software licence/public release remain separate decisions.
+
+## D020 — Remember route history and fail closed on unsupported restrictions
+
+- **Status:** Implemented with independent routing checks.
+- **Decision:** Compile supported via-node/via-way `no_*` and `only_*` restrictions into forbidden directed-edge sequences. Track the previous edge and relevant prefix history in Dijkstra states. For inbound search reverse both traversal and restriction sequences. Explicitly prohibit immediate segment reversals as a conservative assumption. Close known approaches for ambiguous/incomplete/unsupported relations; record every fallback.
+- **Alternatives:** Ignore turn restrictions; use node-only Dijkstra; remember only the last edge; interpret an only-turn rule solely at its last segment; claim complete OSM support.
+- **Rationale:** Allowed future turns depend on how the current location was reached. The snapshot resolves 291 of 342 relations; the remaining 51 require recorded fallback, removing 109 directed segments. Unsupported semantics must not silently become permitted manoeuvres.
+- **Consequence:** 24 new tests cover import and restriction semantics. An independent uncompressed-history/Bellman–Ford solver agrees on 240 comparisons across 24 seeded graphs, both directions. Turning off compiled restrictions alone puts 202 inbound and 180 outbound nodes incorrectly inside the 10-minute model limit. These are implementation/model checks, not on-road validation. UNDERSTOOD remains unverified.
+
 ## Change log
 
 | Date | Change | Evidence / consequence |
@@ -162,3 +178,4 @@ Updated: 2026-09-18. Offline MVP implemented; current choices and the user-autho
 | 2026-09-17 | Added the Stage 1 comparison and conditional TomTom pilot recommendation. | Official capability/price sources reviewed; current Mapbox Product Terms changed the initial technical preference. TomTom agreement, account access, and local quality remain unresolved. |
 | 2026-09-17 | Added the accepted offline algorithm milestone, D013. | User clarified the Year 2 mathematics portfolio objective and instructed continuation after the recommendation. Directed-graph lesson prepared; implementation and understanding remain unverified. |
 | 2026-09-18 | Completed offline MVP and verification, D014–D018. | User explicitly requested autonomous build/debug; exact routing, additive planning time, grid algorithms, local demo, 47 Python and 6 frontend tests, package check. Browser rendering remains open. |
+| 2026-09-18 | Added bounded OSM case and turn-history routing, D019–D020. | Frozen attributed data, static assumptions, 24 additional tests, both-direction results, restriction ablation and visually reviewed route maps; no live traffic or verified residential access claim. |

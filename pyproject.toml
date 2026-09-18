@@ -16,4 +16,4 @@ commute-map = "commute_map.__main__:main"
 include = ["commute_map*"]
 
 [tool.setuptools.package-data]
-commute_map = ["static/*"]
+commute_map = ["static/*", "data/klcc/*"]

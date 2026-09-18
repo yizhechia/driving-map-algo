@@ -1,0 +1,3291 @@
+{
+  "source": {
+    "case": "KLCC bounded static road-network experiment",
+    "source": "OpenStreetMap contributors, via Overpass API",
+    "source_url": "https://www.openstreetmap.org/copyright",
+    "endpoint": "https://overpass-api.de/api/interpreter",
+    "osm_base_timestamp": "2026-09-18T12:59:21Z",
+    "snapshot_sha256": "4319a544d71a1d44bd9cef977b675fa0fbb346075e92544ffe34e1bbed0bdd4c",
+    "raw_response_sha256": "df6c08859299e7195b0ed193ad010d923b695f9855cc216446a8000cbbac7a56",
+    "raw_response_bytes": 4068974,
+    "query_bounds_south_west_north_east": [
+      3.149,
+      101.701,
+      3.176,
+      101.734
+    ],
+    "anchor_node": 1198097247,
+    "anchor_label": "Jalan Ampang road node near KLCC (unverified workplace entrance)",
+    "normalization": "Preserve all element IDs, road-node coordinates, way node sequences, restriction members/tags, names and routing-relevant way/node tags. Other way/node tags omitted. Sorted compact JSON, gzip mtime=0.",
+    "license": "ODbL 1.0",
+    "license_url": "https://opendatacommons.org/licenses/odbl/1-0/",
+    "attribution": "© OpenStreetMap contributors"
+  },
+  "threshold_minutes": 10,
+  "buffer_min_per_km": 0.2,
+  "assumed_speed_kph": {
+    "motorway": 60,
+    "motorway_link": 30,
+    "trunk": 50,
+    "trunk_link": 25,
+    "primary": 40,
+    "primary_link": 25,
+    "secondary": 35,
+    "secondary_link": 20,
+    "tertiary": 30,
+    "tertiary_link": 20,
+    "unclassified": 25,
+    "residential": 25,
+    "living_street": 10,
+    "service": 15
+  },
+  "audit": {
+    "input_nodes": 23928,
+    "input_ways": 6787,
+    "rejected_ways": {
+      "conditional_oneway": 3,
+      "non_driving_class": 2202,
+      "restricted_access": 696
+    },
+    "rejected_nodes": {
+      "restricted_access": 213,
+      "unsupported_barrier": 95,
+      "unverified_barrier": 488
+    },
+    "segments_omitted_at_bounds_missing_or_blocked_nodes": 1588,
+    "restriction_relations": 342,
+    "restriction_status": {
+      "compiled": 291,
+      "fallback": 51
+    },
+    "fallback_closed_ways": [
+      160196659,
+      306236714,
+      610941226,
+      610941227,
+      611889464,
+      660114822,
+      723321031,
+      773599955,
+      781823468,
+      958212994,
+      1161254744,
+      1221954852,
+      1227969008,
+      1245168204,
+      1256465559,
+      1311167002,
+      1311167028,
+      1323368088,
+      1328078333,
+      1331842853,
+      1331842856,
+      1331842857,
+      1331842858,
+      1331842862,
+      1331842863,
+      1333687406,
+      1432695915,
+      1442506525,
+      1442506526,
+      1442506527,
+      1442506529,
+      1442506531,
+      1444092883,
+      1502366331,
+      1502366335
+    ],
+    "fallback_removed_directed_segments": 109,
+    "forbidden_sequences": 285,
+    "nodes": 12645,
+    "directed_segments": 20106,
+    "restrictions": [
+      {
+        "relation": 7367461,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 7391109,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 7391603,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 7391606,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 7394324,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 7611722,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 9825036,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 9826854,
+        "status": "fallback",
+        "reason": "unavailable_approach_or_exit",
+        "closed_ways": [
+          611889464
+        ]
+      },
+      {
+        "relation": 9826855,
+        "status": "fallback",
+        "reason": "unavailable_approach_or_exit",
+        "closed_ways": [
+          306236714
+        ]
+      },
+      {
+        "relation": 9913322,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 10021586,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 10243705,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 10243706,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 10552908,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 10649119,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 10760667,
+        "status": "fallback",
+        "reason": "unavailable_approach_or_exit",
+        "closed_ways": [
+          160196659
+        ]
+      },
+      {
+        "relation": 10781930,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 10781931,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 10904749,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 11256121,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 11275236,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 11275237,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 11275248,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 11275249,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 11305808,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 11626338,
+        "status": "fallback",
+        "reason": "unavailable_via_segment",
+        "closed_ways": [
+          1331842856
+        ]
+      },
+      {
+        "relation": 11626339,
+        "status": "fallback",
+        "reason": "unavailable_approach_or_exit",
+        "closed_ways": [
+          1331842858
+        ]
+      },
+      {
+        "relation": 11626340,
+        "status": "fallback",
+        "reason": "unavailable_approach_or_exit",
+        "closed_ways": [
+          1331842857
+        ]
+      },
+      {
+        "relation": 11626341,
+        "status": "fallback",
+        "reason": "unavailable_approach_or_exit",
+        "closed_ways": [
+          1331842862
+        ]
+      },
+      {
+        "relation": 11626342,
+        "status": "fallback",
+        "reason": "unavailable_approach_or_exit",
+        "closed_ways": [
+          1331842863
+        ]
+      },
+      {
+        "relation": 11626343,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 11626344,
+        "status": "fallback",
+        "reason": "unavailable_approach_or_exit",
+        "closed_ways": [
+          1444092883
+        ]
+      },
+      {
+        "relation": 11626345,
+        "status": "fallback",
+        "reason": "unavailable_approach_or_exit",
+        "closed_ways": [
+          1331842853
+        ]
+      },
+      {
+        "relation": 12240922,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 12240923,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 12240924,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 12480792,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 12609676,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 12609677,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 12609678,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 12609679,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 12609680,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 12609681,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 13534897,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 13887709,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 13887711,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 14889763,
+        "status": "fallback",
+        "reason": "unavailable_approach_or_exit",
+        "closed_ways": []
+      },
+      {
+        "relation": 15029002,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15029003,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15029004,
+        "status": "compiled",
+        "kind": "no_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15532168,
+        "status": "compiled",
+        "kind": "no_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15532169,
+        "status": "compiled",
+        "kind": "no_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15532170,
+        "status": "compiled",
+        "kind": "only_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15532171,
+        "status": "compiled",
+        "kind": "only_straight_on",
+        "sequences": 1
+      },
+      {
+        "relation": 15532172,
+        "status": "compiled",
+        "kind": "only_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15532173,
+        "status": "compiled",
+        "kind": "only_straight_on",
+        "sequences": 1
+      },
+      {
+        "relation": 15654468,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15654469,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15654471,
+        "status": "compiled",
+        "kind": "no_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15654931,
+        "status": "compiled",
+        "kind": "no_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15654932,
+        "status": "compiled",
+        "kind": "no_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15654933,
+        "status": "compiled",
+        "kind": "no_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15654934,
+        "status": "compiled",
+        "kind": "no_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15654935,
+        "status": "compiled",
+        "kind": "no_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15654936,
+        "status": "compiled",
+        "kind": "no_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15654937,
+        "status": "compiled",
+        "kind": "no_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15655043,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15655196,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15655197,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15661500,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15661501,
+        "status": "compiled",
+        "kind": "no_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15661504,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15661505,
+        "status": "compiled",
+        "kind": "no_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15661646,
+        "status": "compiled",
+        "kind": "no_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15661647,
+        "status": "compiled",
+        "kind": "no_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15662010,
+        "status": "compiled",
+        "kind": "no_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15662011,
+        "status": "compiled",
+        "kind": "no_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15662012,
+        "status": "compiled",
+        "kind": "no_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15662013,
+        "status": "compiled",
+        "kind": "no_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15662014,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15662039,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15665388,
+        "status": "compiled",
+        "kind": "no_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15685202,
+        "status": "compiled",
+        "kind": "no_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15685203,
+        "status": "compiled",
+        "kind": "no_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15688430,
+        "status": "compiled",
+        "kind": "no_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15689077,
+        "status": "fallback",
+        "reason": "unavailable_approach_or_exit",
+        "closed_ways": []
+      },
+      {
+        "relation": 15706197,
+        "status": "compiled",
+        "kind": "no_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15706198,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15706199,
+        "status": "compiled",
+        "kind": "no_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15796419,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15796420,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15796421,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15796422,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15796423,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15796424,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15796425,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15796426,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15796427,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15796428,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15796429,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15801071,
+        "status": "compiled",
+        "kind": "no_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15801072,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15801073,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15801113,
+        "status": "compiled",
+        "kind": "no_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15801114,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15801115,
+        "status": "compiled",
+        "kind": "no_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15801116,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15801117,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15801118,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15801119,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15801127,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15801128,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15801199,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15861740,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15916910,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15960827,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15960832,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15960833,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 15960834,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16016718,
+        "status": "fallback",
+        "reason": "unavailable_via_segment",
+        "closed_ways": [
+          1161254744
+        ]
+      },
+      {
+        "relation": 16226615,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16226616,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16226617,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16228941,
+        "status": "compiled",
+        "kind": "only_straight_on",
+        "sequences": 1
+      },
+      {
+        "relation": 16228942,
+        "status": "compiled",
+        "kind": "only_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16228943,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16228944,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16228945,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16228946,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16342242,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16381525,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16381526,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16381527,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16381528,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16381529,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16385510,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16385519,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16445926,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16470139,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16568873,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16568880,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16568881,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16568882,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16568883,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16568884,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16568885,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16568886,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16569045,
+        "status": "compiled",
+        "kind": "no_straight_on",
+        "sequences": 1
+      },
+      {
+        "relation": 16569678,
+        "status": "compiled",
+        "kind": "no_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16629644,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16640051,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16658777,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16658778,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16665493,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16666150,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16666151,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16666152,
+        "status": "fallback",
+        "reason": "unavailable_approach_or_exit",
+        "closed_ways": [
+          723321031
+        ]
+      },
+      {
+        "relation": 16666153,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16666154,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16666155,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16666156,
+        "status": "fallback",
+        "reason": "unavailable_approach_or_exit",
+        "closed_ways": [
+          1221954852
+        ]
+      },
+      {
+        "relation": 16703540,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16786234,
+        "status": "compiled",
+        "kind": "no_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16786235,
+        "status": "compiled",
+        "kind": "only_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16793307,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 16889981,
+        "status": "fallback",
+        "reason": "unavailable_approach_or_exit",
+        "closed_ways": []
+      },
+      {
+        "relation": 16895890,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17034793,
+        "status": "compiled",
+        "kind": "only_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17131185,
+        "status": "fallback",
+        "reason": "missing_member_way",
+        "closed_ways": []
+      },
+      {
+        "relation": 17131545,
+        "status": "fallback",
+        "reason": "missing_member_way",
+        "closed_ways": []
+      },
+      {
+        "relation": 17136330,
+        "status": "fallback",
+        "reason": "unavailable_approach_or_exit",
+        "closed_ways": [
+          1245168204
+        ]
+      },
+      {
+        "relation": 17136331,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17136332,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17136333,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17136334,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17136335,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17136336,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17136337,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17136338,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17136339,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17136340,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17136341,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17136342,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17140050,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17140051,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17251126,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17251127,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17256030,
+        "status": "compiled",
+        "kind": "no_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17292188,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17292189,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17292190,
+        "status": "fallback",
+        "reason": "unavailable_approach_or_exit",
+        "closed_ways": [
+          1256465559
+        ]
+      },
+      {
+        "relation": 17292191,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17292192,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17292193,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17292194,
+        "status": "fallback",
+        "reason": "unavailable_approach_or_exit",
+        "closed_ways": [
+          1323368088
+        ]
+      },
+      {
+        "relation": 17292195,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17292196,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17292197,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17292198,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17292199,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17292200,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17292201,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17365420,
+        "status": "fallback",
+        "reason": "unavailable_approach_or_exit",
+        "closed_ways": [
+          958212994
+        ]
+      },
+      {
+        "relation": 17368386,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17388831,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17388832,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17388833,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17388835,
+        "status": "fallback",
+        "reason": "unavailable_approach_or_exit",
+        "closed_ways": [
+          781823468
+        ]
+      },
+      {
+        "relation": 17402587,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17447102,
+        "status": "fallback",
+        "reason": "unavailable_approach_or_exit",
+        "closed_ways": []
+      },
+      {
+        "relation": 17472469,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17472470,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17472471,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17472472,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17472473,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17472474,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17477417,
+        "status": "compiled",
+        "kind": "only_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17477418,
+        "status": "fallback",
+        "reason": "unavailable_approach_or_exit",
+        "closed_ways": []
+      },
+      {
+        "relation": 17513703,
+        "status": "compiled",
+        "kind": "no_straight_on",
+        "sequences": 1
+      },
+      {
+        "relation": 17698129,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17698283,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17799033,
+        "status": "fallback",
+        "reason": "unavailable_approach_or_exit",
+        "closed_ways": []
+      },
+      {
+        "relation": 17802349,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17821733,
+        "status": "compiled",
+        "kind": "only_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17821734,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17821735,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17854481,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17960516,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17975249,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 17975255,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18001284,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18001285,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18009831,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18009832,
+        "status": "compiled",
+        "kind": "no_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18009833,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18009834,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18009835,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18009836,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18009837,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18023308,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18023309,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18065999,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18066000,
+        "status": "compiled",
+        "kind": "no_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18109060,
+        "status": "compiled",
+        "kind": "no_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18138060,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18208644,
+        "status": "fallback",
+        "reason": "malformed_members",
+        "closed_ways": [
+          1328078333
+        ]
+      },
+      {
+        "relation": 18262024,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18262025,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18262026,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18262322,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18262323,
+        "status": "fallback",
+        "reason": "unavailable_approach_or_exit",
+        "closed_ways": [
+          1331842858
+        ]
+      },
+      {
+        "relation": 18262324,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18262325,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18262326,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18262327,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18262328,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18274230,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18274231,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18274232,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18274233,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18285053,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18285737,
+        "status": "fallback",
+        "reason": "unavailable_approach_or_exit",
+        "closed_ways": [
+          1333687406
+        ]
+      },
+      {
+        "relation": 18290105,
+        "status": "compiled",
+        "kind": "no_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18332935,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18548916,
+        "status": "compiled",
+        "kind": "no_straight_on",
+        "sequences": 1
+      },
+      {
+        "relation": 18548917,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18548918,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18548919,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18548920,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18548921,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18548922,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18549865,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18549866,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18549867,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18549868,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18549869,
+        "status": "compiled",
+        "kind": "no_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18592460,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18617174,
+        "status": "fallback",
+        "reason": "unavailable_approach_or_exit",
+        "closed_ways": [
+          1227969008
+        ]
+      },
+      {
+        "relation": 18649112,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18649113,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18649114,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18649115,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18649116,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18649117,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18649118,
+        "status": "compiled",
+        "kind": "no_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18649119,
+        "status": "compiled",
+        "kind": "no_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18649120,
+        "status": "compiled",
+        "kind": "no_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18649121,
+        "status": "compiled",
+        "kind": "no_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18649122,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18649123,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18649124,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18649125,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18755400,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18763266,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 18816976,
+        "status": "fallback",
+        "reason": "unavailable_approach_or_exit",
+        "closed_ways": []
+      },
+      {
+        "relation": 19091572,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 19178934,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 19178935,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 19178936,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 19178937,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 19206109,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 19333651,
+        "status": "fallback",
+        "reason": "unavailable_approach_or_exit",
+        "closed_ways": [
+          660114822
+        ]
+      },
+      {
+        "relation": 19333652,
+        "status": "fallback",
+        "reason": "unavailable_approach_or_exit",
+        "closed_ways": [
+          660114822
+        ]
+      },
+      {
+        "relation": 19333653,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 19456108,
+        "status": "fallback",
+        "reason": "unavailable_approach_or_exit",
+        "closed_ways": []
+      },
+      {
+        "relation": 19456163,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 19638868,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 19638869,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 19638870,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 19638871,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 19638872,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 19638873,
+        "status": "fallback",
+        "reason": "unavailable_approach_or_exit",
+        "closed_ways": [
+          610941227
+        ]
+      },
+      {
+        "relation": 19638877,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 19638878,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 19638879,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 19638880,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 19638881,
+        "status": "fallback",
+        "reason": "unavailable_approach_or_exit",
+        "closed_ways": [
+          610941226
+        ]
+      },
+      {
+        "relation": 19646201,
+        "status": "fallback",
+        "reason": "malformed_members",
+        "closed_ways": [
+          1432695915
+        ]
+      },
+      {
+        "relation": 19719238,
+        "status": "fallback",
+        "reason": "malformed_members",
+        "closed_ways": [
+          773599955
+        ]
+      },
+      {
+        "relation": 19719240,
+        "status": "fallback",
+        "reason": "malformed_members",
+        "closed_ways": [
+          1311167002
+        ]
+      },
+      {
+        "relation": 19719241,
+        "status": "fallback",
+        "reason": "unsupported_via_members",
+        "closed_ways": [
+          1442506531
+        ]
+      },
+      {
+        "relation": 19719242,
+        "status": "fallback",
+        "reason": "malformed_members",
+        "closed_ways": [
+          1442506526
+        ]
+      },
+      {
+        "relation": 19719243,
+        "status": "fallback",
+        "reason": "unsupported_via_members",
+        "closed_ways": [
+          1442506525
+        ]
+      },
+      {
+        "relation": 19719244,
+        "status": "fallback",
+        "reason": "malformed_members",
+        "closed_ways": [
+          1442506529
+        ]
+      },
+      {
+        "relation": 19816698,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 19816699,
+        "status": "compiled",
+        "kind": "no_left_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 19852373,
+        "status": "compiled",
+        "kind": "no_straight_on",
+        "sequences": 1
+      },
+      {
+        "relation": 20148516,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 20148517,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 20243152,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 20243153,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 20572669,
+        "status": "fallback",
+        "reason": "malformed_members",
+        "closed_ways": [
+          1502366335
+        ]
+      },
+      {
+        "relation": 20572670,
+        "status": "fallback",
+        "reason": "malformed_members",
+        "closed_ways": [
+          1502366331
+        ]
+      },
+      {
+        "relation": 20572671,
+        "status": "fallback",
+        "reason": "malformed_members",
+        "closed_ways": [
+          1442506527
+        ]
+      },
+      {
+        "relation": 20572672,
+        "status": "fallback",
+        "reason": "unsupported_via_members",
+        "closed_ways": [
+          1502366331
+        ]
+      },
+      {
+        "relation": 20572673,
+        "status": "fallback",
+        "reason": "unsupported_via_members",
+        "closed_ways": [
+          1502366335
+        ]
+      },
+      {
+        "relation": 20572674,
+        "status": "fallback",
+        "reason": "ambiguous_via_connection",
+        "closed_ways": [
+          1311167028
+        ]
+      },
+      {
+        "relation": 20572675,
+        "status": "fallback",
+        "reason": "malformed_members",
+        "closed_ways": [
+          1311167028
+        ]
+      },
+      {
+        "relation": 20572676,
+        "status": "fallback",
+        "reason": "ambiguous_via_connection",
+        "closed_ways": [
+          1442506527
+        ]
+      },
+      {
+        "relation": 21132175,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 21132176,
+        "status": "compiled",
+        "kind": "no_u_turn",
+        "sequences": 1
+      },
+      {
+        "relation": 21273465,
+        "status": "compiled",
+        "kind": "no_right_turn",
+        "sequences": 1
+      }
+    ]
+  },
+  "directions": {
+    "home_to_work": {
+      "probes": 12645,
+      "routable": 9281,
+      "inside": 9003,
+      "outside": 278,
+      "no_route_in_model": 3364,
+      "index_states": 13068,
+      "relaxations": 24045,
+      "restriction_ablation": {
+        "cost_increased_for_routable_nodes": 4283,
+        "newly_unroutable_nodes": 191,
+        "maximum_cost_increase_minutes": 5.291870643174477,
+        "wrongly_inside_if_compiled_restrictions_disabled": 202
+      }
+    },
+    "work_to_home": {
+      "probes": 12645,
+      "routable": 8775,
+      "inside": 8432,
+      "outside": 343,
+      "no_route_in_model": 3870,
+      "index_states": 12496,
+      "relaxations": 23243,
+      "restriction_ablation": {
+        "cost_increased_for_routable_nodes": 4551,
+        "newly_unroutable_nodes": 156,
+        "maximum_cost_increase_minutes": 7.442862988527149,
+        "wrongly_inside_if_compiled_restrictions_disabled": 180
+      }
+    }
+  },
+  "fallback_reasons": {
+    "ambiguous_via_connection": 2,
+    "malformed_members": 10,
+    "missing_member_way": 2,
+    "unavailable_approach_or_exit": 31,
+    "unavailable_via_segment": 2,
+    "unsupported_via_members": 4
+  },
+  "nearby_illustration": {
+    "selection": "Exploratory maximum inbound time gap among non-motorway/trunk road nodes routable in both directions and separated by 20–80 m; not held out.",
+    "separation_metres": 73.6962896112287,
+    "points": [
+      {
+        "osm_node": 1198144301,
+        "coordinates": [
+          101.7192734,
+          3.1623366
+        ],
+        "routes": {
+          "home_to_work": {
+            "planning_minutes": 2.1553353879758452,
+            "road_minutes": 1.9301510937097122,
+            "buffer_minutes": 0.22518429426613307,
+            "distance_km": 1.1259214713306653,
+            "osm_nodes": [
+              1198144301,
+              1208298912,
+              1198144341,
+              13757737316,
+              293569327,
+              1198144361,
+              6542045312,
+              7220773668,
+              1198144312,
+              7437241339,
+              1198097188,
+              1198097162,
+              1198097142,
+              7437241347,
+              1198144367,
+              264831043,
+              10738438496,
+              8044316508,
+              7249162743,
+              7249162744,
+              34419685,
+              7249164290,
+              264831042,
+              5626393225,
+              7249164294,
+              7249162783,
+              4970181732,
+              13957824569,
+              7264802048,
+              5740413359,
+              264831040,
+              12406684349,
+              3908795216,
+              5740413364,
+              10216200607,
+              6138444107,
+              6138444106,
+              13100017045,
+              7177009268,
+              264831036,
+              13584031417,
+              264831033,
+              6332716857,
+              264831032,
+              6138434958,
+              7177009250,
+              35204017,
+              7177009245,
+              5464328330,
+              34419706,
+              1198097247
+            ],
+            "osm_way_ids": [
+              713328118,
+              713328118,
+              713328118,
+              1503242914,
+              773585884,
+              103777534,
+              103777534,
+              773585883,
+              773585886,
+              773585886,
+              1157852909,
+              137918336,
+              773587358,
+              773587358,
+              135511795,
+              135511795,
+              135511795,
+              135511795,
+              135511795,
+              1157864737,
+              1157864738,
+              1117036688,
+              1117036688,
+              1117036688,
+              436434060,
+              436434060,
+              436434060,
+              436434060,
+              436434060,
+              436434060,
+              436434060,
+              436434060,
+              436434060,
+              436434060,
+              436434060,
+              436434060,
+              778031847,
+              778031847,
+              778031847,
+              778031847,
+              778031847,
+              778031844,
+              778031848,
+              778031848,
+              778031848,
+              778031848,
+              778031848,
+              1157860341,
+              1157860340,
+              436434065
+            ]
+          },
+          "work_to_home": {
+            "planning_minutes": 3.19650993973352,
+            "road_minutes": 2.8883944718824295,
+            "buffer_minutes": 0.3081154678510909,
+            "distance_km": 1.5405773392554545,
+            "osm_nodes": [
+              1198097247,
+              35204018,
+              4343236457,
+              11240206351,
+              35204020,
+              12434814425,
+              3153960331,
+              1198097192,
+              6860467854,
+              8044327398,
+              8044327401,
+              8044327400,
+              6860467851,
+              1812033168,
+              7241002640,
+              7474118091,
+              7474118085,
+              13058953628,
+              13058953635,
+              13058953631,
+              264834201,
+              10901393782,
+              4970181640,
+              12728096673,
+              13059245274,
+              264834188,
+              13059245273,
+              5752966890,
+              4970181660,
+              12675352190,
+              13942272974,
+              264834264,
+              12544386535,
+              12728051383,
+              12675352162,
+              8004883851,
+              264834267,
+              264834285,
+              12728051382,
+              4970181673,
+              8502691661,
+              264834273,
+              11938813408,
+              12675067739,
+              11938813411,
+              11941637742,
+              7157923052,
+              264834278,
+              11242806566,
+              7157923056,
+              264834281,
+              12535253620,
+              7221716348,
+              12675067743,
+              264834292,
+              12675067800,
+              12640357419,
+              12534059370,
+              12726359458,
+              12535166507,
+              264834194,
+              7248585240,
+              7248585241,
+              7248585239,
+              7248585238,
+              293569313,
+              5733555925,
+              11250773344,
+              293569315,
+              13392706001,
+              293569316,
+              7248585237,
+              7248587455,
+              7248587450,
+              7248587453,
+              293569318,
+              7248587449,
+              293569320,
+              10738438493,
+              5733555820,
+              293569322,
+              10921587838,
+              8364239115,
+              11442925980,
+              478512470,
+              11442925983,
+              1198144301
+            ],
+            "osm_way_ids": [
+              436434065,
+              436434065,
+              436434064,
+              436434064,
+              137918335,
+              137918335,
+              137918335,
+              137918335,
+              137918335,
+              615057439,
+              24399828,
+              777836649,
+              777836649,
+              615057436,
+              615057436,
+              103777556,
+              103777556,
+              103777556,
+              103777556,
+              103777556,
+              1173237945,
+              1173237947,
+              1173237947,
+              1173237947,
+              1173237947,
+              1173237947,
+              1173237947,
+              1173237947,
+              1173237947,
+              1173237947,
+              1173237947,
+              1173237947,
+              1173237947,
+              1173237947,
+              1173237947,
+              1200780226,
+              1200780225,
+              1200780100,
+              1200780100,
+              1200780094,
+              1200780099,
+              1200780098,
+              1200780098,
+              1200780098,
+              1200780098,
+              1300412146,
+              1193665443,
+              1193665444,
+              1193665444,
+              1193665444,
+              1193665444,
+              1193665444,
+              1193665444,
+              1193665444,
+              137916464,
+              137916464,
+              137916464,
+              137916464,
+              137916464,
+              137916464,
+              713328117,
+              713328117,
+              713328117,
+              713328117,
+              713328117,
+              776858734,
+              776858734,
+              776858734,
+              776858734,
+              776858734,
+              776858734,
+              776858734,
+              776858734,
+              776858733,
+              776858733,
+              776858733,
+              713328118,
+              713328118,
+              713328118,
+              713328118,
+              713328118,
+              713328118,
+              713328118,
+              713328118,
+              713328118,
+              713328118
+            ]
+          }
+        }
+      },
+      {
+        "osm_node": 293569258,
+        "coordinates": [
+          101.7186992,
+          3.1626691
+        ],
+        "routes": {
+          "home_to_work": {
+            "planning_minutes": 10.247920617109216,
+            "road_minutes": 9.154664409966056,
+            "buffer_minutes": 1.0932562071431604,
+            "distance_km": 5.466281035715801,
+            "osm_nodes": [
+              293569258,
+              13143941005,
+              33138218,
+              293569267,
+              293569263,
+              293569268,
+              7248586544,
+              7248586545,
+              12726359465,
+              33138219,
+              293569272,
+              12726359462,
+              5733555813,
+              12726359461,
+              33138220,
+              12726359460,
+              1208298858,
+              33138221,
+              10801391893,
+              10801391892,
+              13270587554,
+              293569277,
+              1208298880,
+              13270587557,
+              33138222,
+              13270587559,
+              13270587560,
+              11303623888,
+              293569282,
+              1743958351,
+              2682052052,
+              1809514833,
+              7234044078,
+              5788357703,
+              10213573694,
+              13270587566,
+              33138223,
+              13270587567,
+              5788357695,
+              1809514972,
+              33138224,
+              11303623890,
+              1992136356,
+              13270587552,
+              12137854476,
+              7228474305,
+              478372966,
+              10181060317,
+              10181047716,
+              10181047715,
+              10181047714,
+              7228474304,
+              2070954830,
+              5788357680,
+              1809514965,
+              10736137881,
+              5788357679,
+              1802533480,
+              7228945652,
+              1809514850,
+              7228945653,
+              12181307151,
+              1802533483,
+              1802533479,
+              6161634376,
+              5786475688,
+              5786393363,
+              12181307137,
+              1802533477,
+              11963769614,
+              478537432,
+              11962558414,
+              11450839830,
+              12076757259,
+              11963728719,
+              5794881271,
+              11963728701,
+              4280753086,
+              11963728717,
+              11963728707,
+              12076759577,
+              4280754389,
+              5794797394,
+              11963769624,
+              11963769611,
+              5794797388,
+              11963769613,
+              475490541,
+              11450839831,
+              8478402797,
+              5794797284,
+              11901392112,
+              5794797265,
+              5794797272,
+              11450839832,
+              264907935,
+              11944471960,
+              478556156,
+              2364021953,
+              10738425309,
+              10738425310,
+              2364021935,
+              12075083579,
+              12075650197,
+              10271036590,
+              5012268071,
+              11419833246,
+              11575788467,
+              11947572317,
+              5012268072,
+              11004953717,
+              11575788468,
+              10738425311,
+              5012268069,
+              1809514836,
+              10270868728,
+              10271036539,
+              11330407019,
+              5012268075,
+              257496906,
+              293569304,
+              1208847598,
+              10801496253,
+              10801496255,
+              5794751614,
+              1208847622,
+              478558194,
+              11936689069,
+              5794751615,
+              7239706404,
+              293569308,
+              293569309,
+              1756919017,
+              478555726,
+              5794747795,
+              5794944061,
+              293569311,
+              5794747770,
+              7248585242,
+              293569313,
+              5733555925,
+              11250773344,
+              293569315,
+              13392706001,
+              293569316,
+              7248585237,
+              7248587455,
+              7248587450,
+              7248587453,
+              293569318,
+              7248587449,
+              293569320,
+              10738438493,
+              5733555820,
+              293569322,
+              10921587838,
+              8364239115,
+              11442925980,
+              478512470,
+              11442925983,
+              1198144301,
+              1208298912,
+              1198144341,
+              13757737316,
+              293569327,
+              1198144361,
+              6542045312,
+              7220773668,
+              1198144312,
+              7437241339,
+              1198097188,
+              1198097162,
+              1198097142,
+              7437241347,
+              1198144367,
+              264831043,
+              10738438496,
+              8044316508,
+              7249162743,
+              7249162744,
+              34419685,
+              7249164290,
+              264831042,
+              5626393225,
+              7249164294,
+              7249162783,
+              4970181732,
+              13957824569,
+              7264802048,
+              5740413359,
+              264831040,
+              12406684349,
+              3908795216,
+              5740413364,
+              10216200607,
+              6138444107,
+              6138444106,
+              13100017045,
+              7177009268,
+              264831036,
+              13584031417,
+              264831033,
+              6332716857,
+              264831032,
+              6138434958,
+              7177009250,
+              35204017,
+              7177009245,
+              5464328330,
+              34419706,
+              1198097247
+            ],
+            "osm_way_ids": [
+              103777531,
+              103777531,
+              103777531,
+              104751346,
+              104751346,
+              104751346,
+              104751346,
+              104751346,
+              104751346,
+              104751346,
+              104751346,
+              104751346,
+              104751346,
+              104751346,
+              104751346,
+              104751346,
+              1161307061,
+              1161307061,
+              1161307060,
+              1161307059,
+              1161307059,
+              104751343,
+              104751343,
+              104751343,
+              104751343,
+              104751343,
+              104751343,
+              104751343,
+              777838901,
+              104751365,
+              104751365,
+              775403629,
+              774750813,
+              775403628,
+              775403628,
+              775403628,
+              774752656,
+              774752656,
+              774752656,
+              774752655,
+              774752654,
+              774752654,
+              774752654,
+              774752654,
+              774752654,
+              774752653,
+              774752652,
+              774752652,
+              774752652,
+              774752652,
+              774752652,
+              1112741773,
+              1112741773,
+              1112741773,
+              1112741772,
+              1112741772,
+              1112741772,
+              1112741772,
+              1112741772,
+              39912434,
+              39912434,
+              39912434,
+              39912434,
+              39912434,
+              39912434,
+              39912434,
+              39912434,
+              39912434,
+              39912434,
+              39912434,
+              775426050,
+              775426050,
+              775426050,
+              775426050,
+              775426050,
+              775426050,
+              775426050,
+              775426050,
+              775426050,
+              775426050,
+              775426050,
+              775426049,
+              1245168239,
+              1245168239,
+              1245168239,
+              1245168239,
+              1245168239,
+              1245168239,
+              1245168239,
+              1245168239,
+              1245168239,
+              1245168239,
+              1245168239,
+              1245168239,
+              1245168239,
+              1245168239,
+              1245168239,
+              1245168239,
+              512608716,
+              512608716,
+              512608716,
+              24405048,
+              24405048,
+              24405048,
+              24405048,
+              24405048,
+              24405048,
+              24405048,
+              24405048,
+              1161235068,
+              1184757163,
+              1184757163,
+              1184757163,
+              1184757163,
+              1184757163,
+              1168519820,
+              1221954855,
+              1221954854,
+              775396367,
+              775364154,
+              1161270078,
+              1161329058,
+              1161329058,
+              1161329058,
+              1161329057,
+              1161330115,
+              137918338,
+              137918338,
+              1168169365,
+              1168169365,
+              1168169365,
+              164030079,
+              164030076,
+              104751360,
+              104751360,
+              104751360,
+              104751360,
+              104751360,
+              1391738192,
+              776858734,
+              776858734,
+              776858734,
+              776858734,
+              776858734,
+              776858734,
+              776858734,
+              776858734,
+              776858733,
+              776858733,
+              776858733,
+              713328118,
+              713328118,
+              713328118,
+              713328118,
+              713328118,
+              713328118,
+              713328118,
+              713328118,
+              713328118,
+              713328118,
+              713328118,
+              713328118,
+              713328118,
+              1503242914,
+              773585884,
+              103777534,
+              103777534,
+              773585883,
+              773585886,
+              773585886,
+              1157852909,
+              137918336,
+              773587358,
+              773587358,
+              135511795,
+              135511795,
+              135511795,
+              135511795,
+              135511795,
+              1157864737,
+              1157864738,
+              1117036688,
+              1117036688,
+              1117036688,
+              436434060,
+              436434060,
+              436434060,
+              436434060,
+              436434060,
+              436434060,
+              436434060,
+              436434060,
+              436434060,
+              436434060,
+              436434060,
+              436434060,
+              778031847,
+              778031847,
+              778031847,
+              778031847,
+              778031847,
+              778031844,
+              778031848,
+              778031848,
+              778031848,
+              778031848,
+              778031848,
+              1157860341,
+              1157860340,
+              436434065
+            ]
+          },
+          "work_to_home": {
+            "planning_minutes": 7.278165240976194,
+            "road_minutes": 6.596548719139541,
+            "buffer_minutes": 0.6816165218366528,
+            "distance_km": 3.4080826091832637,
+            "osm_nodes": [
+              1198097247,
+              35204018,
+              4343236457,
+              11240206351,
+              35204020,
+              2517476991,
+              5601529269,
+              1198144235,
+              1198144205,
+              7241002641,
+              7241002642,
+              6860467848,
+              1198144350,
+              2517476993,
+              5601529277,
+              1198097101,
+              5464328363,
+              13243011288,
+              11286450521,
+              1198097333,
+              1743958348,
+              9062163535,
+              3153960329,
+              1743958347,
+              1743958344,
+              11964203685,
+              1743958345,
+              11937489814,
+              1743958346,
+              3885488358,
+              3153602209,
+              12728441773,
+              10930796036,
+              11940811402,
+              12728441767,
+              34419729,
+              5464328324,
+              264833976,
+              3885488357,
+              5464327520,
+              5464328397,
+              264833772,
+              3870178386,
+              3846082804,
+              12421400394,
+              264833779,
+              12728441701,
+              3846082807,
+              34419732,
+              3870178373,
+              3885488359,
+              12729144521,
+              264833737,
+              4067806191,
+              10599512620,
+              10923866379,
+              10923866375,
+              13539382700,
+              264833796,
+              3885488360,
+              13539745302,
+              13539745306,
+              7045577446,
+              3846082763,
+              6142088941,
+              12957028676,
+              12957028673,
+              13159867056,
+              7045577423,
+              5742597611,
+              13334079316,
+              13334059717,
+              13334059707,
+              8502844279,
+              264833669,
+              13334079311,
+              8118270813,
+              264833899,
+              34419665,
+              12147288569,
+              12147288570,
+              12147288574,
+              34419738,
+              13383071254,
+              12425531001,
+              264833672,
+              7261931315,
+              7261931320,
+              7261931319,
+              12425523698,
+              7261931318,
+              7261931316,
+              5742437023,
+              264833820,
+              11664019013,
+              5742437024,
+              13545400203,
+              13545380600,
+              264833866,
+              5748335583,
+              6860467840,
+              5748335586,
+              264833851,
+              11586448941,
+              12120570175,
+              11586448949,
+              11586448951,
+              11381912076,
+              264833861,
+              7243216276,
+              5748300301,
+              5748300314,
+              12247852223,
+              13442638511,
+              1722609985,
+              3307788996,
+              5742404204,
+              13442638518,
+              1722610026,
+              34419363,
+              13442638510,
+              1722610047,
+              33138217,
+              10683062371,
+              10683062372,
+              34419365,
+              293569258
+            ],
+            "osm_way_ids": [
+              436434065,
+              436434065,
+              436434064,
+              436434064,
+              103777542,
+              103777542,
+              103777542,
+              103777542,
+              103777542,
+              103777542,
+              103777542,
+              103777542,
+              103777542,
+              103777542,
+              103777542,
+              778706307,
+              778706307,
+              778706307,
+              778706307,
+              778706307,
+              137918337,
+              137918337,
+              137918337,
+              137918337,
+              137918337,
+              137918337,
+              137918337,
+              137918337,
+              5115991,
+              5115991,
+              5115991,
+              5115991,
+              5115991,
+              5115991,
+              5115991,
+              5115991,
+              5115991,
+              5115991,
+              5115991,
+              5115991,
+              5115991,
+              5115991,
+              5115991,
+              5115991,
+              5115991,
+              5115991,
+              5115991,
+              5115991,
+              5115991,
+              5115991,
+              1218677162,
+              1218677162,
+              1218677161,
+              1218677161,
+              977460120,
+              977460120,
+              1253841093,
+              1253841093,
+              1253841092,
+              1253841092,
+              1253841092,
+              1253841092,
+              1253841092,
+              1218708937,
+              1218708936,
+              1218708936,
+              1218708936,
+              1218708936,
+              1218708936,
+              5116003,
+              5116003,
+              5116003,
+              5116003,
+              5116003,
+              5116003,
+              5116003,
+              5116003,
+              778101132,
+              778101135,
+              778101135,
+              778101135,
+              778101135,
+              778101135,
+              778101135,
+              778101135,
+              1372395553,
+              778101134,
+              778101136,
+              778101136,
+              778101136,
+              778101136,
+              24399798,
+              24399798,
+              24399790,
+              24399790,
+              24399790,
+              24399790,
+              24399790,
+              24399790,
+              24399790,
+              24399790,
+              24399790,
+              24399790,
+              24399790,
+              24399790,
+              24399790,
+              24399790,
+              24399790,
+              4992465,
+              4992465,
+              4992465,
+              4992465,
+              4992465,
+              1465621769,
+              1465621770,
+              662470051,
+              662470051,
+              662470051,
+              1148194845,
+              662470053,
+              662470053,
+              103777558,
+              776871396,
+              776871396,
+              1148194848,
+              103777531
+            ]
+          }
+        }
+      }
+    ]
+  }
+}

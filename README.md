@@ -2,7 +2,7 @@
 
 An offline algorithm MVP for comparing complete commutes in Klang Valley: main corridor, local access roads, building access, and a distance allowance, combined into **one planning time**.
 
-**Working prototype:** Python routing engine, interactive local demo, three sampling methods, GeoJSON export, and reproducible tests. All road connections, distances, and times are synthetic examples. This is not a live traffic map or a calibrated reliability model.
+**Working prototype:** Python routing engines, interactive synthetic demo, three sampling methods, GeoJSON export, and reproducible tests. A separate frozen OpenStreetMap case now adds real road geometry around KLCC, with one-way, access and turn restrictions. All travel times remain assumptions. This is not a live traffic map or a calibrated reliability model.
 
 ## Run the demo
 
@@ -23,6 +23,36 @@ If port 8080 is busy:
 ```bash
 python -m commute_map serve --port 8090
 ```
+
+## Run the real-road case
+
+The bundled KLCC snapshot runs offline with the same Python installation:
+
+```bash
+python -m commute_map roads --output outputs/klcc-inbound.geojson
+python -m commute_map roads --direction work_to_home --output outputs/klcc-outbound.geojson
+python -m commute_map roads --probe 293569258 --output outputs/klcc-route.geojson
+python -m scripts.evaluate_roads
+```
+
+This separate CLI case contains **12,645 road nodes and 20,106 directed segments**.
+The importer resolves 291 turn restrictions and records conservative fallbacks for
+51 others. A Dijkstra index remembers relevant route history, including restrictions
+across several road segments; inbound search reverses the restriction sequences too.
+
+![KLCC nearby-road illustration](docs/evaluation/klcc-nearby-routes.png)
+
+In this model, two road nodes 73.7 m apart require 2.16 and 10.25 minutes to the same
+Jalan Ampang anchor. This is an exploratory illustration using assumed speeds and
+a 0.2 min/km buffer. Neither probe is a verified home entrance. The bounded extract
+and deliberate access closures can omit valid real-world detours. The CLI exports
+road-node points rather than inferring accessible land or residences.
+
+The [case report](docs/evaluation/KLCC_ROAD_CASE.md) includes both-direction counts,
+turn-rule sensitivity, exact assumptions, validation and reproduction commands.
+© [OpenStreetMap contributors](https://www.openstreetmap.org/copyright),
+[ODbL 1.0](https://opendatacommons.org/licenses/odbl/1-0/). Data attribution and
+checksums travel with the snapshot and exports. The browser demo below remains synthetic.
 
 ## The model
 
@@ -88,13 +118,13 @@ node --test tests/frontend.test.cjs
 
 These tests launch an ephemeral local Python server. Set the `PYTHON` environment variable if your interpreter command differs. They run the actual JavaScript against the real API using a small DOM/canvas test double; they do not verify browser layout or native downloads.
 
-Validation recorded on 2026-09-18: **47 Python tests and 6 frontend tests pass**, plus a wheel build and isolated installation check. Routing is also checked against independently implemented Floyd–Warshall on 30 seeded random directed graphs. See [verification details](docs/evaluation/MVP_VERIFICATION.md).
+Validation recorded on 2026-09-18: **71 Python tests and 6 frontend tests pass**, plus a wheel build and isolated installation check including the road snapshot. Synthetic routing is checked against independently implemented Floyd–Warshall on 30 seeded random directed graphs; restricted road routing is checked against full-history expansion and Bellman–Ford on 24 seeded graphs in both directions. See [MVP verification](docs/evaluation/MVP_VERIFICATION.md) and the [road-case report](docs/evaluation/KLCC_ROAD_CASE.md).
 
 ## Scope and next work
 
 The local MVP is runnable. Visual browser verification remains incomplete: the available cloud browser blocked access to the loopback demo. The schematic is not a street map, and its approximate geographic export is not surveyed road data. Morning/evening profiles are fixed invented multipliers, not dated departure-time routing. Sparse results can miss access changes; cell interiors are approximations even with full sampling.
 
-Live provider integration, real road-access validation, repeated journey observations, and calibrated risk remain future work. The original traffic-aware V1 criteria are preserved in the project brief and have not been met by this synthetic MVP. A public open-source release and licence selection are still pending.
+Live provider integration, validation of real entrances and manoeuvres, repeated journey observations, and calibrated risk remain future work. The original traffic-aware V1 criteria are preserved in the project brief and have not been met by the synthetic MVP or static road case. A public open-source release and software licence selection are still pending; the bundled OSM data has its own ODbL licence.
 
 ## Project documents
 
@@ -106,6 +136,8 @@ Live provider integration, real road-access validation, repeated journey observa
 | [MVP guide](docs/MVP_GUIDE.md) | Module map, mathematics, limitations, and walkthrough. |
 | [Experiment plan](docs/evaluation/MVP_EXPERIMENT_PLAN.md) | Frozen comparison settings and default-selection rule. |
 | [Results](docs/evaluation/MVP_RESULTS.md) | Reproducible outcomes and failure analysis. |
+| [KLCC road case](docs/evaluation/KLCC_ROAD_CASE.md) | Frozen OSM data, turn restrictions, real geometry and static assumptions. |
+| [Turn-restriction exercise](docs/learning/TURN_RESTRICTIONS.md) | Why routing needs history; understanding remains unverified. |
 | [First learning exercise](docs/learning/OFFLINE_ALGORITHM_MILESTONE.md) | Directed-graph fundamentals; understanding is still unverified. |
 | [Provider research](docs/research/ROUTING_PROVIDER_REVIEW.md) | Earlier official-source review; integration remains conditional. |
 | [Formal instructions](docs/PROJECT_INSTRUCTIONS.md) | Preserved user-supplied instructions. |

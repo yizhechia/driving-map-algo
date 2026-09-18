@@ -6,10 +6,16 @@ from .server import serve
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Commute Lab · synthetic algorithm MVP")
+    parser = argparse.ArgumentParser(description="Commute Lab · offline routing experiments")
     sub = parser.add_subparsers(dest="command",required=True)
     web = sub.add_parser("serve",help="Open a local interactive demo")
     web.add_argument("--port",type=int,default=8080)
+    roads = sub.add_parser("roads", help="Frozen KLCC OSM case with static assumed speeds")
+    roads.add_argument("--threshold", type=float, default=10)
+    roads.add_argument("--direction", choices=["home_to_work", "work_to_home"], default="home_to_work")
+    roads.add_argument("--buffer", type=float, default=0.2)
+    roads.add_argument("--probe", type=int, help="Retained OSM road-node ID for one reconstructed route")
+    roads.add_argument("--output", type=Path)
     for command in ("demo","export"):
         cmd = sub.add_parser(command)
         cmd.add_argument("--threshold",type=float,default=45)
@@ -29,10 +35,14 @@ def main():
             parser.exit(2,f"Cannot start local server: {error}\n")
         return
     try:
-        config = {"threshold":args.threshold,"direction":args.direction,"period":args.period,
-                  "buffer_min_per_km":args.buffer,"condo_minutes":args.condo,
-                  "size":args.size,"method":args.method,"budget":args.budget}
-        result = export(config) if args.command == "export" else run(config)
+        if args.command == "roads":
+            from .road_case import run_road_case
+            result = run_road_case(args.direction, args.threshold, args.buffer, args.probe)
+        else:
+            config = {"threshold":args.threshold,"direction":args.direction,"period":args.period,
+                      "buffer_min_per_km":args.buffer,"condo_minutes":args.condo,
+                      "size":args.size,"method":args.method,"budget":args.budget}
+            result = export(config) if args.command == "export" else run(config)
         encoded = json.dumps(result,indent=2,allow_nan=False)+"\n"
         if args.output:
             args.output.parent.mkdir(parents=True,exist_ok=True)

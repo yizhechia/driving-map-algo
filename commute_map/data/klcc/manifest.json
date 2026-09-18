@@ -1,0 +1,22 @@
+{
+  "case": "KLCC bounded static road-network experiment",
+  "source": "OpenStreetMap contributors, via Overpass API",
+  "source_url": "https://www.openstreetmap.org/copyright",
+  "endpoint": "https://overpass-api.de/api/interpreter",
+  "osm_base_timestamp": "2026-09-18T12:59:21Z",
+  "snapshot_sha256": "4319a544d71a1d44bd9cef977b675fa0fbb346075e92544ffe34e1bbed0bdd4c",
+  "raw_response_sha256": "df6c08859299e7195b0ed193ad010d923b695f9855cc216446a8000cbbac7a56",
+  "raw_response_bytes": 4068974,
+  "query_bounds_south_west_north_east": [
+    3.149,
+    101.701,
+    3.176,
+    101.734
+  ],
+  "anchor_node": 1198097247,
+  "anchor_label": "Jalan Ampang road node near KLCC (unverified workplace entrance)",
+  "normalization": "Preserve all element IDs, road-node coordinates, way node sequences, restriction members/tags, names and routing-relevant way/node tags. Other way/node tags omitted. Sorted compact JSON, gzip mtime=0.",
+  "license": "ODbL 1.0",
+  "license_url": "https://opendatacommons.org/licenses/odbl/1-0/",
+  "attribution": "© OpenStreetMap contributors"
+}
