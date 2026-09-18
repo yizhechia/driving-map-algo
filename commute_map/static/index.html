@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Commute Lab · Klang Valley</title><link rel="stylesheet" href="/style.css"><script src="/app.js" defer></script></head>
+<body>
+<header><a class="brand" href="/" aria-label="Commute Lab home"><span class="brand-icon">↗</span> Commute Lab</a><span class="header-note">KLANG VALLEY / ALGORITHM PREVIEW</span><span class="tag">Synthetic data</span></header>
+<main>
+<section class="intro"><p class="eyebrow">THE WHOLE JOURNEY MATTERS</p><h1>Find a commute that fits.</h1><p>Compare the main corridor, the last few streets, and the time it takes to get out of your building.</p></section>
+<div class="workspace">
+<aside class="panel controls"><h2>Your commute</h2><form id="settings">
+<label>Workplace<input value="KLCC · example access point" disabled></label>
+<label>Direction<select id="direction"><option value="work_to_home">KLCC → home</option><option value="home_to_work">Home → KLCC</option></select></label>
+<label>Maximum planning time <span class="unit">minutes</span><input id="threshold" type="number" min="1" max="240" step="1" value="45" required></label>
+<label>Traffic scenario<select id="period"><option value="example">Base example</option><option value="morning">Morning · assumed</option><option value="evening">Evening · assumed</option></select></label>
+<div class="divider"></div><h3>Time allowances</h3>
+<label>Distance buffer <span class="unit">min/km</span><input id="buffer" type="number" min="0" max="5" step="0.05" value="0.2" required></label><p class="hint">Adds time using the routed distance. An adjustable assumption, not measured traffic risk.</p>
+<label>Condo access <span class="unit">minutes</span><input id="condo" type="number" min="0" max="60" step="1" value="5" required></label><p class="hint">Added once for a condo: home ↔ parking ↔ exit. Landed examples add zero.</p>
+<details><summary>Grid &amp; sampling</summary><label>Fine grid<select id="size"><option value="16">16 × 16 · 2 km cells</option><option value="32" selected>32 × 32 · 1 km cells</option><option value="64">64 × 64 · 500 m cells</option></select></label><label>Sampling method<select id="method"><option value="full">Full scan · default</option><option value="uniform">Uniform · experimental</option><option value="adaptive">Adaptive · experimental</option></select></label><label>Sample budget<input id="budget" type="number" min="0" max="4096" step="1" value="256"></label><p class="hint">Full scan checks every cell centre. Reduced sampling estimates unqueried cells and may miss small pockets.</p></details>
+<button class="primary" id="run" type="submit">Update map <span>↗</span></button><p id="run-status" class="hint" role="status" aria-live="polite">Preparing the example…</p><p id="error" role="alert" hidden></p>
+</form></aside>
+<section class="results">
+<div class="panel map-panel"><div class="map-title"><div><p class="eyebrow">ACCESSIBILITY GRID</p><h2 id="map-heading">KLCC → home</h2></div><button id="download" class="secondary" disabled>Export GeoJSON ↓</button></div>
+<div class="map-banner">Illustrative network and times · this is a schematic, not a road map.</div>
+<canvas id="map" width="900" height="690" role="img" aria-label="Synthetic commute accessibility grid. Use the residence buttons below for accessible route details."></canvas>
+<div class="legend"><span><i class="inside"></i>Within limit</span><span><i class="outside"></i>Above limit</span><span><i class="unknown"></i>Unknown / no route</span><span class="legend-note">Click a cell to inspect its access point</span></div>
+<div class="map-footer" id="coverage"></div></div>
+<div class="panel detail-panel" id="detail" aria-live="polite"><p class="eyebrow">ROUTE DETAILS</p><h2>Select a residence or a grid cell</h2><p>The final planning time includes all four modelled components.</p></div>
+</section></div>
+<section class="examples"><div class="section-title"><div><p class="eyebrow">CORRIDOR + LOCAL ACCESS</p><h2>A suburb name only tells part of the story.</h2></div><p>Your example journeys, with the same assumptions applied.</p></div><div id="cards" class="cards"></div></section>
+<footer><strong>How to read this</strong><p>Planning time = corridor + local roads + home access + distance buffer. These are synthetic scenarios inspired by Klang Valley; they are not current ETAs, P90 estimates, or arrival guarantees. Cell colours describe an assumed access point at each centre. The surrounding cell area is an approximation.</p></footer>
+</main></body></html>
