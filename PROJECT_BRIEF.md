@@ -1,6 +1,22 @@
 # Map Algorithm — Project Brief
 
-Status: Stage 0 specification with Stage 1 research update, 2026-09-17. TomTom Calculate Route is the preferred technical candidate for a small pilot; full V1 provider selection remains open pending applicable API terms and account access. No implementation stack or contour algorithm has been selected. Numerical targets below are proposed acceptance criteria, not achieved results. See the [provider review](docs/research/ROUTING_PROVIDER_REVIEW.md).
+Status: **Offline algorithm MVP implemented**, 2026-09-18. Routing, sampling, local demo, exports and automated checks exist. Browser rendering is still unverified. Stage 1 provider research remains incomplete and paused. The original traffic-aware V1 contract in sections 1–8 is retained as a later target; synthetic results do not satisfy it. See [current state](PROJECT_STATE.md), [MVP guide](docs/MVP_GUIDE.md), and [provider review](docs/research/ROUTING_PROVIDER_REVIEW.md).
+
+## Current portfolio MVP
+
+The user explicitly authorized autonomous implementation and debugging while away, including local-road differences, coarse/fine spatial grids, distance allowance within final travel time, and condo access. This supersedes the earlier instruction to wait for comprehension answers during this build; understanding remains unverified.
+
+Current model, in minutes:
+
+`T_plan(p,d) = a_p + min over legal routes P [sum of scenario edge times + beta × sum of routed edge km]`.
+
+Here `a_p` is the once-per-home access allowance (5 minutes for a condo by default); `beta` is an adjustable, nonnegative assumed minutes-per-kilometre buffer. Optimize the complete planning time, not the nearest entrance or suburb-level corridor alone. Inputs include direction, threshold, fixed example/morning/evening profile, buffer, condo allowance, resolution, method and budget. Exact CLI/API limits and outputs are described in `docs/MVP_GUIDE.md` and validated in `commute_map/app.py`.
+
+The implementation is Python 3.10+ with no runtime dependencies. It uses a synthetic directed graph, a one-workplace Dijkstra index, full/uniform/adaptive grid sampling, interpolation, unsmoothed cell outlines, and a small local UI. The geometric domain is a 32 × 32 km schematic with 2 km/1 km/500 m cell widths. Each centre is one assumed access point, not a guarantee about all properties inside a cell.
+
+The original portfolio research question remains useful: can adaptive sampling reduce queries at comparable accuracy? The fixed comparison did not favor this adaptive method: at 256 samples uniform mean agreement was 97.82%, adaptive 95.38%. Full scan is the default for the available small graph. These are model comparisons, not real-world traffic accuracy or actual paid-API savings; the [report](docs/evaluation/MVP_RESULTS.md) provides denominators, unresolved predictions and limits.
+
+The planning allowance is not calibrated statistical risk. No claim that it captures every traffic condition, represents P90, or provides an arrival probability is authorized by these examples. Real network data, dated traffic routing, journey observations, public deployment, and licence selection remain future work. A later real-data integration must explicitly distinguish provider road duration from the added planning allowances before evaluating the retained traffic-aware criteria.
 
 ## 1. Problem statement
 
@@ -175,36 +191,34 @@ For C5, agreement uses all eligible held-out points as its denominator; unresolv
 
 The holdout reference measures approximation to a routing provider, not actual commute accuracy. Any provider-isochrone comparison is supplementary and must account for differences in settings and access semantics.
 
-## 9. Initial repository structure
+## 9. Repository structure
 
-Stage 0 creates documentation only:
+Stage 0 began with documentation. The offline MVP now uses:
 
 | Path | Responsibility |
 | --- | --- |
-| `README.md` | Public-facing purpose, current maturity, and navigation. |
-| `PROJECT_BRIEF.md` | Stable goal, V1 contract, mathematics, non-goals, unknowns, and acceptance targets. |
-| `PROJECT_STATE.md` | Current stage, evidence, component status, blockers, learning progress, and next actions. |
-| `DECISIONS.md` | Established constraints, proposed defaults, alternatives, consequences, and deferred choices. |
-| `docs/PROJECT_INSTRUCTIONS.md` | Preserved formal instructions supplied by the user; line endings normalized only. |
+| `README.md` | Overview, commands, model, results and limitations. |
+| `PROJECT_BRIEF.md` | Stable goal, current offline scope, retained traffic-aware target. |
+| `PROJECT_STATE.md` | Evidence, actual progress, remaining work and learning status. |
+| `DECISIONS.md` | Choices, alternatives, rationale and scope changes. |
+| `commute_map/` | Python graph, routing, sampling, boundary, app, CLI and server. |
+| `commute_map/static/` | Local interactive demo. |
+| `tests/` | Model/HTTP and optional frontend-logic tests. |
+| `scripts/evaluate.py` | Reproducible developer experiment. |
+| `docs/MVP_GUIDE.md` | Architecture, mathematics and user walkthrough. |
+| `docs/evaluation/` | Frozen plan, raw results, report and verification record. |
+| `docs/learning/` | Offline plan and original directed-graph exercise. |
+| `docs/research/` | Earlier provider research. |
+| `docs/PROJECT_INSTRUCTIONS.md` | Preserved user-supplied formal instructions. |
 
-Implementation locations below remain suggestions, not created scaffolding or a selected language/framework. The research directory was added during Stage 1:
-
-| Future path | Earliest purpose |
-| --- | --- |
-| `docs/research/` | Now contains the Stage 1 provider review, with fact status, citations, and access date. |
-| `src/` | Stage 2 point-to-point prototype; later sampling, contours, and a small provider boundary as needed. |
-| `tests/` | Meaningful routing-semantic and algorithm tests alongside implementation. |
-| `examples/` | Reproducible inputs and legally shareable examples after the first prototype. |
-| `docs/evaluation/` | Experiment definitions and measured results as they become available. |
-
-Add components when their stage requires them. Choose runtime, dependencies, storage, licence, and packaging after the relevant investigation; do not create empty modules now.
+Add future components only when needed. The MVP uses in-run memoization, not a commercial-data cache. No runtime database, ML package or provider credential is required.
 
 ## 10. Delivery and learning rules
 
-The user is the primary developer. Before each significant implementation: explain the problem, compare approaches, recommend and justify one, check understanding through the user's reasoning, then implement a small component, test it, and document the result.
+The user is the primary developer. The usual loop is to explain the problem, compare approaches, justify a recommendation, check understanding, implement, test and document. For this MVP session, the user explicitly instructed autonomous execution without waiting for further prompts; D014 records that exception. Preserve the learning backlog and never infer mastery from code completion.
 
 Track BUILT, TESTED, UNDERSTOOD, and DOCUMENTED separately. Explained content does not count as understood, and written acceptance criteria do not count as passing tests.
 
-The initial session delivered Stage 0 only. The user's subsequent instruction to continue advanced work to Stage 1 routing/data investigation. Stages 2–4 build and examine the deterministic engine; Stages 5–6 add reliability and bottleneck work; Stage 7 adds the product UI; Stage 8 broadens evaluation; Stage 9 prepares release. Incremental validation belongs beside implementation even though there is a dedicated later evaluation stage.
+The initial session delivered Stage 0 only. The user's subsequent instruction to continue advanced work to Stage 1 routing/data investigation. After clarifying the portfolio objective, the user accepted an additional offline algorithm milestone before further provider integration; see D013. Stage 1 remains open. Stages 2–4 build and examine the traffic-aware deterministic engine; Stages 5–6 add reliability and bottleneck work; Stage 7 adds the product UI; Stage 8 broadens evaluation; Stage 9 prepares release. Incremental validation belongs beside implementation even though there is a dedicated later evaluation stage.
 
 The uploaded [formal instructions](docs/PROJECT_INSTRUCTIONS.md) and the user's Work Mode handoff govern this draft. New explicit user instructions take precedence. Important new assumptions here are marked as proposed in [DECISIONS.md](DECISIONS.md), and the current learning state is recorded in [PROJECT_STATE.md](PROJECT_STATE.md).

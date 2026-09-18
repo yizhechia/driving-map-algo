@@ -1,16 +1,16 @@
 # Map Algorithm — Decisions
 
-Updated: 2026-09-17. Stage 1 research; no implementation.
+Updated: 2026-09-18. Offline MVP implemented; current choices and the user-authorized workflow exception are in D014–D018. Earlier entries retain historical rationale. Stage 1 provider research remains open.
 
-**Established** means required by the user's formal instructions or Work Mode handoff. **Proposed** means a concrete Stage 0 recommendation that has not yet been validated through implementation or the user's reasoning. **Deferred** means no selection has been made. A documented decision is not evidence that the user has mastered the concept.
+**Established** means required by the user's instructions, handoff, or an accepted subsequent scope decision. **Proposed** means a recommendation that has not yet been validated through implementation or the user's reasoning. **Deferred** means no selection has been made. A documented decision is not evidence that the user has mastered the concept.
 
 ## D001 — Establish the problem before building
 
 - **Status:** Established.
-- **Decision:** The initial work session completed Stage 0 documentation only. Keep the repository as persistent project memory and advance sequentially. The user's subsequent instruction to continue permits Stage 1 research.
+- **Decision:** The initial work session completed Stage 0 documentation only. Keep the repository as persistent project memory and advance sequentially unless a justified change is recorded. Stage 1 research was subsequently authorized; D013 now records the accepted preliminary offline milestone.
 - **Alternatives:** Start routing calls immediately; build a frontend first; leave scope only in chat.
 - **Rationale:** The project needs an explicit question, input/output contract, and evaluation targets before technology choices.
-- **Consequence:** No routing code, frontend, model, provider selection, package scaffold, or API calls in Stage 0. The next stage is research.
+- **Consequence:** Stage 0 contained no routing code, frontend, model, provider selection, package scaffold, or API calls. Stage 1 research followed. D013 governs the current next work.
 
 ## D002 — Use specific access locations and explicit directions
 
@@ -75,8 +75,8 @@ Updated: 2026-09-17. Stage 1 research; no implementation.
 - **Status:** Initial comparison documented; full V1 selection still conditional. See D011 and the [provider review](docs/research/ROUTING_PROVIDER_REVIEW.md).
 - **Open candidates:** Mapbox, Google Routes, OpenRouteService, Valhalla, OSRM, GraphHopper, and other OpenStreetMap-based options. They are candidates named by the user, not assertions of equivalent traffic support.
 - **Decision still needed:** Verify the applicable agreement and account capabilities for the preferred technical candidate, TomTom. Stage 1 has compared it with Mapbox and Google and screened the original open-source candidates. Local routing quality requires a later pilot; documentation cannot establish that result.
-- **Also deferred:** Language/framework, CRS implementation, database, cache lifetime, sampling/refinement method, contour library, test coordinates, and open-source licence.
-- **Consequence:** Provider research is now documented, but no implementation or routing validation has occurred. Retention, redistribution, and public examples must follow the verified terms of the selected data source.
+- **Also deferred:** Framework, CRS implementation, database, cache lifetime, sampling/refinement method, contour library, test coordinates, and open-source licence. Python is implemented for the offline MVP under D014–D018; the live-provider architecture remains open.
+- **Consequence:** Provider research is documented, but no live-provider implementation or real-traffic validation has occurred. Retention, redistribution, and public examples must follow the verified terms of the selected data source.
 
 ## D010 — Preserve the developer learning loop
 
@@ -101,7 +101,58 @@ Updated: 2026-09-17. Stage 1 research; no implementation.
 - **Decision:** Plan eight semantic cases from two access points, two departure times, and two directions. Inspect one response before expanding. Proposed cap: 20 attempts including retries; exact points, dates, policy, account allowance, and rate limit remain unset.
 - **Alternatives:** Query a large grid first; begin with a square matrix over every point; rely on a returned duration without inspecting access.
 - **Rationale:** A small route response makes endpoint order, time, units, traffic fields, and entrance access inspectable. Larger matrices can hide these mistakes and consume unnecessary units.
-- **Consequence:** Use synthetic cases for deterministic failure tests and respect verified retention rules for provider results. No API client, cache, sampling algorithm, or frontend is created before the user reasons through the relevant concepts.
+- **Consequence:** Use synthetic cases for deterministic failure tests and respect verified retention rules for provider results. This was the initial learning gate; D014 supersedes it for the autonomous offline MVP. Live provider access and data-use permissions remain unresolved.
+
+## D013 — Prioritize a preliminary offline algorithm milestone
+
+- **Status:** Established direction; detailed algorithms and numerical experiment targets remain proposed.
+- **Decision:** After the user clarified the Year 2 mathematics résumé objective, they accepted the recommendation to start with a hand-solvable directed graph and a uniform-sampling baseline. Add the offline milestone documented in `docs/learning/OFFLINE_ALGORITHM_MILESTONE.md`, then investigate one adaptive method. Pause further provider investigation for now.
+- **Alternatives:** Keep provider licensing/account access on the critical path; implement the full traffic-aware product first; expand into reliability or a substantial frontend.
+- **Rationale:** Controlled examples support reproducible algorithm evaluation and developer understanding without a commercial traffic dependency. The intended contribution is sample selection and boundary approximation, measured against a baseline.
+- **Consequence:** This is an explicit sequencing change, not completion of Stage 1 or a substitute claim of traffic-aware V1 delivery. Retain the original brief and C1–C8 targets. Static/synthetic outputs must identify their assumptions. Commercial terms remain relevant when provider work resumes.
+- **Experiment constraint:** A complete fixed-weight graph permits direct shortest-path computation. Use it as a reference behind a restricted travel-time query interface; report simulated queries separately from actual runtime, reference-generation cost, and later API billing. Do not claim that sampling beats exact graph routing merely because it accesses fewer precomputed values.
+- **Implementation recommendation:** Python and small functions, with a trusted reference for routing checks. Teach and check understanding before each significant component. No code is authorized to be treated as understood from the user's agreement to the roadmap.
+- **Revisit when:** The uniform baseline and first experiments expose feasibility or scope issues, or the user reprioritizes live traffic.
+
+## D014 — Complete an autonomous offline MVP, preserve unverified learning
+
+- **Status:** Authorized by the user's subsequent explicit instruction.
+- **Decision:** Proceed through implementation, debugging, runnable tests and a local demo while the user is away, without stopping for comprehension replies. Keep the original formal instructions unchanged and record learning as unverified.
+- **Alternatives:** Stop at each unanswered question; treat consent to build as demonstrated understanding.
+- **Rationale:** The user explicitly requested a working MVP and autonomous continuation, including concrete corridor/local/condo/buffer examples. This takes precedence over the earlier pacing rule for this session.
+- **Consequence:** Python package, tests, evaluation and local UI are implemented. This does not authorize paid routing calls, claim real traffic accuracy, publish the private repo, or change UNDERSTOOD status.
+
+## D015 — Add distance allowance to optimized time, not a separate score
+
+- **Status:** Implemented and tested as an assumption.
+- **Decision:** Minimize the sum of nonnegative scenario edge minutes plus `beta × routed edge km`, then add one home access allowance. Defaults: beta 0.2 min/km, condo 5 minutes, landed 0. Both are adjustable.
+- **Alternatives:** Choose the base-time route and only then buffer it; penalize straight-line distance; produce a separate residence score; call the buffer a statistical percentile.
+- **Rationale:** The user wants one planning duration reflecting the modelled components. Including the allowance during route selection can change the best entrance. Routed distance is the distance exposure of the chosen path.
+- **Consequence:** The base Sungai Buloh and Rawang examples are 48 and 40 minutes; at default assumed distances/buffer they are 54 and 47.6. The linear buffer is not calibrated variance or an arrival probability and cannot claim to capture all risks. Home overhead is fixed per endpoint, including outbound arrival; it is added once. Workplace overhead is unmodelled.
+
+## D016 — Use one exact workplace search and full grid as the default
+
+- **Status:** Implemented; fixture comparison supports the choice.
+- **Decision:** Run Dijkstra once per workplace/direction/policy, reversing adjacency for inbound travel. Query all centres by default on the small available graph. Keep uniform and adaptive options for the expensive-oracle experiment.
+- **Alternatives:** Repeated point-to-point searches; force an adaptive method as default; choose an entrance from first-leg distance alone.
+- **Rationale:** A complete nonnegative static graph supports exact one-workplace search. Batch and repeated routes agree; sparse uniform mean agreement (97.82%) exceeded this adaptive method (95.38%) at 256 queries across 18 fixed cases.
+- **Consequence:** No claim that fewer lookups beat exact graph routing or that the selected method is universally best. Report index work, model queries and six example lookups separately; paid API calls are zero. Private home access cannot serve as an intermediate shortcut.
+
+## D017 — Represent coarse/fine accessibility by explicit cells
+
+- **Status:** Implemented and tested at model centres.
+- **Decision:** Use a 32 × 32 km schematic, 16/32/64 centres per axis, and 4 × 4 initial major blocks for adaptive sampling. Interpolate from usable observed corners; direct observations override interpolation. Extract cell boundaries by shared-side cancellation.
+- **Alternatives:** One duration per suburb; excessive smoothing; assume all-equal corners imply a uniform interior; introduce Marching Squares before a simple boundary works.
+- **Rationale:** Small modules make local access costs, query budgets and failure cases inspectable. Unsmooth outlines preserve grid-supported pockets and holes.
+- **Consequence:** Resolution is 2 km/1 km/500 m, not the original live V1's proposed 100 m target. Cells approximate their centres; no real street-level guarantee. GeoJSON includes synthetic provenance, coverage and possible domain truncation. Sparse sampling can still miss pockets and unseen disconnected access.
+
+## D018 — Keep the demo local and record verification limits
+
+- **Status:** Implemented; automated checks pass; real browser verification open.
+- **Decision:** Use the Python standard library server on loopback, vanilla JavaScript/canvas, no runtime package or routing key, and optional Node tests without npm dependencies.
+- **Alternatives:** Start a large frontend framework, deploy publicly, or let browser availability block all completion work.
+- **Rationale:** The objective is an inspectable algorithm MVP. The available cloud browser cannot access the loopback server; a DOM/canvas test double allows interaction-logic tests against the real API while keeping the rendering gap explicit.
+- **Consequence:** 47 Python tests and 6 JavaScript tests pass. Installation was checked independently. Visual layout and native browser downloads remain unverified, so UI TESTED remains PARTIAL. Invalid huge numbers and stale settings/export races have regression coverage. No publication, account setup or public exposure was added.
 
 ## Change log
 
@@ -109,3 +160,5 @@ Updated: 2026-09-17. Stage 1 research; no implementation.
 | --- | --- | --- |
 | 2026-09-17 | Initialized the Stage 0 decision log. | Based on both identical uploaded instruction copies and the current Work Mode handoff. No previous repository files existed. |
 | 2026-09-17 | Added the Stage 1 comparison and conditional TomTom pilot recommendation. | Official capability/price sources reviewed; current Mapbox Product Terms changed the initial technical preference. TomTom agreement, account access, and local quality remain unresolved. |
+| 2026-09-17 | Added the accepted offline algorithm milestone, D013. | User clarified the Year 2 mathematics portfolio objective and instructed continuation after the recommendation. Directed-graph lesson prepared; implementation and understanding remain unverified. |
+| 2026-09-18 | Completed offline MVP and verification, D014–D018. | User explicitly requested autonomous build/debug; exact routing, additive planning time, grid algorithms, local demo, 47 Python and 6 frontend tests, package check. Browser rendering remains open. |

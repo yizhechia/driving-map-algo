@@ -1,101 +1,100 @@
 # Map Algorithm — Project State
 
-Updated: 2026-09-17.
+Updated: 2026-09-18.
 
 ## Current position
 
-- **Current stage:** Stage 1 — Routing & Traffic Data Investigation.
-- **Current objective:** Establish a provider with both the technical capability and data-use permissions needed by the V1 design.
-- **Outcome:** Initial official-source comparison documented. TomTom Calculate Route is the preferred technical candidate for a small pilot, conditional on applicable agreement and account access. No final full-V1 provider commitment or implementation.
-- **Repository:** `yizhechia/driving-map-algo`; default branch `main`. GitHub reported the repository empty with no branches at the initial inspection. Repository visibility was private; public release is a future goal.
-- **Working context:** `00 | Planning`. Read this file, `PROJECT_BRIEF.md`, and `DECISIONS.md` when resuming; the formal instructions are preserved in `docs/PROJECT_INSTRUCTIONS.md`.
+- **Milestone:** Offline algorithm MVP implemented and checked; browser rendering verification remains open. Original traffic-aware V1 is a later target. Stage 1 provider investigation is incomplete and paused.
+- **Latest authorization:** The user explicitly requested autonomous implementation and debugging through a working MVP while away, including corridor/local grids, a distance allowance inside the final time, and condo access. This overrides the earlier requirement to wait for a learning answer before implementation for this work session. Understanding must still not be inferred.
+- **Repository:** `yizhechia/driving-map-algo`, private, `main`. At this resumption, GitHub held Stage 0/1 documents; the offline plan and MVP code were local only. This version contains the reviewed offline MVP, tests, documentation and evaluation results. Earlier upload attempts were blocked by automatic approval review; the user subsequently instructed continuation after the destination and blocker were explained. Repository visibility stays private.
+- **Run:** `python -m commute_map serve` from the repository root. Python ≥3.10, no runtime packages or API keys.
+- **Working context:** `00 | Planning`. Read this file, `PROJECT_BRIEF.md`, and `DECISIONS.md` when resuming.
 
-## What we are building
+## Implemented behavior
 
-A Klang Valley commute accessibility engine that takes one workplace, threshold, explicit departure time, direction, and study area. It queries traffic-aware driving durations for specific access points and uses our own sampling and contour algorithm to estimate the feasible region. It must reveal local access differences where the data and sampling support them.
+One planning time per home:
 
-V1 produces inspectable geographic outputs and supporting evidence. TomTom is the conditional technical recommendation, not an activated integration. The algorithm, stack, and precise pilot location remain undecided. Reliability, bottleneck attribution, and a frontend are later work.
+`home access + min over directed routes (corridor time + local-road time + beta × routed km)`.
 
-## Completed in Stage 0
+The buffer is part of route optimization, not a separate residence score. Default beta is an assumed 0.2 min/km. Condo access adds 5 minutes once at the home endpoint, adjustable. These assumptions are not empirical volatility estimates or arrival guarantees.
 
-| Deliverable | Location | Current evidence |
-| --- | --- | --- |
-| Formal problem statement | `PROJECT_BRIEF.md` §1 | A bounded, directed, traffic-aware access problem. |
-| V1 user story | `PROJECT_BRIEF.md` §2 | One workplace/threshold/departure/direction per run. |
-| Precise inputs | `PROJECT_BRIEF.md` §3 | Coordinate, time, policy, domain, sampling, and budget contracts. |
-| Precise outputs | `PROJECT_BRIEF.md` §4 | Geometry, sample evidence, unknown coverage, provenance, and diagnostics. |
-| Mathematical formulation | `PROJECT_BRIEF.md` §5 | Directional ETA set, finite-sample approximation, and clearly deferred reliability target. |
-| Explicit non-goals | `PROJECT_BRIEF.md` §6 | V1 exclusions and staged development scope are documented. |
-| Technical unknowns | `PROJECT_BRIEF.md` §7 | Provider semantics, access validity, licensing, drift, and approximation risks. |
-| Measurable success criteria | `PROJECT_BRIEF.md` §8 | Proposed C1–C8; no achieved results. |
-| Initial repository structure | `PROJECT_BRIEF.md` §9 | Five documentation files; future source/test paths are suggestions only. |
-| Decision rationale and alternatives | `DECISIONS.md` | Established constraints separated from proposed and deferred choices. |
+- Generic directed graph and one-workplace Dijkstra index, with forward/outbound and reverse/inbound search.
+- Synthetic KL-inspired fixture with Sungai Buloh, Rawang, Cheras, an alternative-entrance example, disconnected access, a local-access jump, and an easy-access pocket.
+- A 32 × 32 km schematic with 16/32/64 cells per axis. Each centre represents one invented access point. Neither suburb labels nor major grid blocks determine a single cost for all homes.
+- Full, uniform, and adaptive sampling; budgets, in-run cache, interpolation, explicit unknown and no-route results.
+- Unsmooth cell-boundary extraction, cell-polygon GeoJSON, provenance, coverage counts, and a warning when eligibility reaches the study edge.
+- Local UI, route breakdowns, selectable examples/cells, settings, error recovery, GeoJSON download logic, and a command-line entry point.
 
-The two uploaded Project Instructions files were byte-identical. The preserved copy changes only line-ending/final-newline formatting. Their source SHA-256 was `86100623ddc9236e6252f6311470001cbee38c82a784434774e76b04e08e7768`.
+## Evidence and component status
 
-## Component status
+YES / PARTIAL / NO. UNDERSTOOD = NO means unverified, not a judgment of ability.
 
-Values are YES / PARTIAL / NO. For a documentation component, BUILT means the artifact exists; TESTED refers only to its documented consistency checks, never software tests. A NO for UNDERSTOOD means there is no demonstrated evidence yet, not that the user is assumed incapable of understanding it.
-
-| Component | BUILT | TESTED | UNDERSTOOD | DOCUMENTED | Evidence / remaining work |
+| Component | BUILT | TESTED | UNDERSTOOD | DOCUMENTED | Evidence / limit |
 | --- | --- | --- | --- | --- | --- |
-| Stage 0 specification and repo documentation | YES | PARTIAL | NO | YES | Draft exists; scope and content checks only. User reasoning and target feasibility remain unverified. |
-| Stage 1 provider investigation | PARTIAL | NO | NO | YES | Official-source comparison and conditional recommendation exist; terms/account questions remain; no API behaviour tested. |
-| Point-to-point routing prototype | NO | NO | NO | PARTIAL | Intended query contract defined; no client or observed responses. |
-| Sampling and contour algorithm | NO | NO | NO | PARTIAL | Requirements and evaluation targets drafted; method not selected. |
-| Fine-grained accessibility validation | NO | NO | NO | PARTIAL | Categories of access-pair test cases identified; no verified coordinates or measurements. |
-| Reliability layer | NO | NO | NO | PARTIAL | Future objective and evidence limits defined; no data or model. |
-| Bottleneck analysis | NO | NO | NO | PARTIAL | Motivation and future scope only. |
-| Frontend / product | NO | NO | NO | NO | Deferred to Stage 7. |
-| Evaluation framework | NO | NO | NO | PARTIAL | Proposed acceptance criteria; no test implementation or results. |
-| Open-source release | NO | NO | NO | PARTIAL | Introductory README only; no software, licence selection, or release. |
+| Stage 0 specification | YES | PARTIAL | NO | YES | All nine original deliverables retained; original traffic-aware targets still proposed. |
+| Offline directed routing and additive time | YES | YES | NO | YES | Hand-checkable examples; both directions; independent Floyd–Warshall reference on 30 seeded random graphs. |
+| Synthetic spatial fixture | YES | YES | NO | YES | Repeatable access costs, multiple entrances, disconnected patch and pocket; no real-world accuracy claim. |
+| Sampling and grid boundary | YES | YES | NO | YES | Budget, interpolation, equality, unknowns, holes, diagonal pockets, clipping, and missed-pocket tests. |
+| Local API and CLI | YES | YES | NO | YES | HTTP inputs/errors/assets/export; package build and isolated installation. |
+| Demo interface | YES | PARTIAL | NO | YES | Six JavaScript interaction tests against the real API with mocked DOM/canvas. Actual browser layout and native download remain unverified. |
+| Algorithm evaluation | YES | YES | NO | YES | All 18 frozen spatial cases; both routing directions against repeated point searches. |
+| Stage 1 provider investigation | PARTIAL | NO | NO | YES | Earlier research retained; applicable terms, account access, and local quality unresolved. |
+| Live traffic-aware V1 | NO | NO | NO | PARTIAL | No commercial API calls, real road network, dated traffic query, or measured journeys. |
+| Empirical reliability / bottleneck attribution | NO | NO | NO | PARTIAL | Distance buffer is an assumption; no statistical reliability or actual delay attribution. |
+| Public open-source release | NO | NO | NO | PARTIAL | Runnable package in private repo; public release, licence, and screenshot/demo review remain pending. |
 
-**Application as a whole:** BUILT NO; TESTED NO; UNDERSTOOD NO (unverified); DOCUMENTED PARTIAL.
+**Offline application:** BUILT YES; TESTED PARTIAL (browser verification gap); UNDERSTOOD NO; DOCUMENTED YES.
 
-## Validation performed and limits
+## Validation on 2026-09-18
 
-- Read the full uploaded formal instructions and the Work Mode handoff.
-- Verified the attachment copies match and inspected repository metadata, root contents, and branches through the connected GitHub integration.
-- Checked the documentation against the nine Stage 0 deliverables and the Stage 0-only boundary.
-- Checked the distinction between departure time and arrival deadlines, inbound/outbound endpoints, unknown and outside, and predicted versus realized durations.
-- Compared official provider documentation, country coverage, endpoint semantics, current public pricing, and available terms. Citations and evidence labels are in `docs/research/ROUTING_PROVIDER_REVIEW.md`.
-- Retrieved Mapbox's linked July 21, 2026 Product Terms and checked the Navigation API storage restriction; the research records its section/page references and source hash.
-- The TomTom developer terms page exposed no API agreement text through web extraction or direct HTML retrieval; permissions remain UNKNOWN.
-- No routing API calls, executable project code, automated software tests, benchmarks, or commute measurements exist.
+- `python -m unittest discover -s tests -v`: **47 tests passed**.
+- `node --test tests/frontend.test.cjs`: **6 tests passed**, no npm packages. Uses actual `app.js` and HTTP API, but a DOM/canvas test double.
+- `python -m scripts.evaluate`: **18 scenarios × 3 samplers**, plus both-direction batch-versus-point routing comparison. Exact route costs agree for all 256 homes per direction; report and raw counts are included with this version.
+- Built a wheel using `pip wheel --no-deps --no-build-isolation`; installed it into an isolated directory; verified imports, static assets, model execution, and GeoJSON serialization from outside the source directory.
+- The available cloud browser returned `net::ERR_BLOCKED_BY_CLIENT` for the local demo. No browser-rendered screenshot or manual browser success is claimed.
+- Fixed numeric overflow so a huge JSON integer returns HTTP 400 instead of interrupting the request.
+- Fixed stale UI/export state when settings change during a calculation or export; regression tests cover both cases.
+- Added coverage and possible clipping metadata to prevent an exported partial region being interpreted as the full reachable set.
 
-## Stage 1 findings
+See `docs/evaluation/MVP_VERIFICATION.md` for reproduction commands and the concrete remaining browser checks.
 
-- **CONFIRMED in documentation:** the reviewed providers expose traffic/time-aware routing capabilities; the report records exact endpoint distinctions and country-level evidence.
-- **Material issue:** retained routing evidence and exported contours require a compatible data-use permission model. Mapbox's reviewed terms explicitly restrict Navigation result storage. Google has separate storage/derived-content/display constraints.
-- **INFERRED recommendation:** prioritize TomTom Calculate Route for the small pilot, pending its applicable API agreement and account entitlement. Its terms have not been verified as more permissive.
-- **Planned experiment:** two access points × two departure times × two directions; one route inspected first; proposed cap of 20 attempts including retries. Nothing has been executed.
-- **Scope:** screened OpenRouteService, OSRM, Valhalla, GraphHopper, and OpenStreetMap as engine/data/baseline options. No verified Klang Valley traffic feed has been acquired for them.
+## Algorithm choice
 
-## In progress / unresolved
+On the frozen synthetic 32 × 32 grid, both directions, three profiles, thresholds 40/45/60:
 
-- **Learning:** The user has not yet demonstrated the Stage 0 time-and-direction distinction.
-- **Proposals:** Departure-time semantics, output contract details, and numerical acceptance targets await discussion and later feasibility evidence.
-- **Stage 1 questions:** TomTom API agreement, account-specific limits/pricing, retention/export rights, product-version access, and local routing quality remain unresolved. Documented country coverage is not street-level validation.
-- **Before Stage 2:** Need exact workplace entrance, pilot bounds, departure date/time, toll policy, usable credentials, and a finite query budget after a provider is chosen.
-- **Before implementation:** resolve the relevant provider-use conditions and complete the learning checkpoint required by the formal instructions. No credentials have been requested or exposed; no third party has been contacted.
+| Method | Queries | Mean agreement on routable centres | Worst agreement |
+| --- | ---: | ---: | ---: |
+| Full | 1,024 | 100.00% | 100.00% |
+| Uniform | 256 | 97.82% | 95.07% |
+| Adaptive | 256 | 95.38% | 82.46% |
 
-## Learning checkpoint
+Unresolved centres count against agreement. Full scan is the dependable default for this small known graph. The adaptive method remains experimental: it can miss an interior reachable pocket even with matching corner labels. Results describe this fixture and resource model, not a universally best algorithm. Actual API calls and costs are zero. Sample query counts, example lookups, and routing-index work are separate.
 
-**Original checkpoint, still unanswered:** Suppose we sample homes A and B for a home-to-KLCC run at 08:00. What is held fixed for both requests? Why would “arrive at KLCC by 09:00” be a different problem, and why would querying KLCC-to-home fail to answer the original question?
+## What remains uncertain
 
-**Current short checkpoint:** If a provider forecasts 38 minutes for one future departure, what would still be needed to claim a 90% chance of arriving within 45 minutes?
+- Real map/network acquisition, access correctness, turn restrictions, actual travel times, and provider traffic behavior.
+- Appropriate distance allowance and per-building overhead. The current linear buffer does not estimate variance, a percentile, or a confidence level.
+- Sparse-sampling generalization beyond these synthetic cases and preservation of unobserved discontinuities.
+- Visual behavior in real desktop/mobile browsers and native GeoJSON downloads.
+- Provider retention, derived-output and display terms and account entitlements. TomTom remains a conditional technical candidate; no account or paid request was activated.
 
-**Status:** Not answered. UNDERSTOOD remains NO until the user reasons through it. If the answer is partial, record PARTIAL and revisit the specific misconception. Future graph, GIS, sampling, and probability concepts are also unassessed.
+## Repository synchronization history
 
-## Highest-value next actions
+The initial save attempt was blocked because automatic approval review required renewed confirmation for uploading local project source and documentation. After the destination and blocker were explained, the user asked to continue. The reviewed file scope is this project only; there are no credentials or unrelated user files. The save uses the existing `main` history without a force update. Verify the resulting commit and file hashes before reporting successful persistence.
 
-1. Discuss the conditional recommendation and complete the short learning checkpoint; update only statuses supported by the user's reasoning.
-2. Obtain the TomTom API agreement applicable to the intended account through an accessible official source or a user-supplied copy; resolve sampling, retained evidence, derived contours, display, and redistribution. Do not substitute consumer terms or assumptions.
-3. Confirm product access/allowance and choose one exact workplace entrance, two home access points, dates/times, toll policy, and a finite query cap for the documented pilot.
-4. Explain the minimal client approach and check the user's time/direction reasoning before implementing Stage 2. Keep all larger components deferred.
+## Next actions
 
-The user's instruction to continue authorized this Stage 1 research. It did not answer the learning questions or establish provider account/data-use permissions. No numerical acceptance target has been relaxed.
+1. Run the documented browser walkthrough and record actual observations; fix any layout or native-download issues found.
+2. Walk the developer through the model, route choice, reversed-graph reasoning, sampling failure case, and measured trade-offs. Do not pause required fixes awaiting these answers.
+3. Add a bounded real-road offline case with explicit static assumptions when ready; keep it separate from synthetic and live-traffic evidence.
+4. Resume provider integration only after capability, data-use and account questions are resolved. Calibrate any reliability claim using suitable journey evidence later.
 
-## Update discipline
+## Learning status
 
-At each meaningful change, record what changed, the evidence supporting status changes, unresolved questions, and the next action. Keep the stable specification in `PROJECT_BRIEF.md` and decision rationale in `DECISIONS.md`. A chat handoff should point to these files rather than substitute for reading them.
+No checkpoint has been answered in this thread. The original directed-graph exercise remains in `docs/learning/OFFLINE_ALGORITHM_MILESTONE.md`. Earlier departure-time versus arrival-by, endpoint direction, and single-ETA versus 90% reliability questions remain unanswered. The user authorized implementation while away, not a change to UNDERSTOOD status.
+
+## History and update discipline
+
+Stage 0 established all nine foundation deliverables and preserved the byte-identical uploaded instructions. Stage 1 documented providers and a conditional pilot without any routing calls. The portfolio discussion authorized an offline milestone, then the user explicitly expanded that into autonomous MVP execution. D013–D018 record the sequence and choices.
+
+Update evidence, unresolved work, and next actions with each meaningful change. Preserve the original formal instructions. The current repository files take precedence over older chat summaries that say the implementation is absent.
