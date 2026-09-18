@@ -12,7 +12,7 @@ The original traffic-aware V1 remains a later target. Provider investigation is 
 
 ## Implementation location
 
-Delivery: main. Recovery branch: mvp/offline-commute. Verified executable-source commit: 3c590e9ea1f75e3c418049e5a54dd4e625d09fa7.
+Delivery branch: mvp/offline-commute. The main branch is unchanged. Verified executable-source commit: 3c590e9ea1f75e3c418049e5a54dd4e625d09fa7.
 
 The original workspace disconnected while browser verification was stalled. The core, local demo and tests were reconstructed from the recorded implementation and saved to GitHub. The recovered source independently passed GitHub Actions: 45 Python test methods, browser interaction/error/mobile checks, the full algorithm comparison, and package installation. Verified run: https://github.com/yizhechia/driving-map-algo/actions/runs/35313293512.
 
@@ -62,3 +62,7 @@ A missed-pocket test explains why matching corners are insufficient. Independent
 No calibrated P90 or arrival probability. The distance coefficient is an adjustable assumption. All lengths and most route times are invented fixtures; the user's 30+18 and 35+5 examples are illustrative. The map is schematic. Static graph routing omits real turn restrictions and evolving traffic. The 500 m finest demo grid does not meet the original proposed 100 m target.
 
 No numerical original V1 target has been declared achieved. No API credentials have been acquired or committed. Public release and licence selection remain future work.
+
+## Promotion status
+
+Automatic approval review rejected advancing main because development authorization did not explicitly include promoting the recovered implementation to the default branch. No retry or bypass was attempted. The tested feature branch is runnable and reviewable; main promotion requires explicit user authorization.

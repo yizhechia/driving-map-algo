@@ -8,7 +8,7 @@ A working offline algorithm MVP for fine-grained commute accessibility, inspired
 
 Requires Python 3.10 or newer. The application and Python tests have no third-party runtime dependencies.
 
-From the repository root:
+On branch mvp/offline-commute, from the repository root:
 
 ~~~sh
 python -m commute_map serve
@@ -20,7 +20,7 @@ If you already have the repository checked out:
 
 ~~~sh
 git fetch origin
-git switch main
+git switch mvp/offline-commute
 git pull --ff-only
 ~~~
 

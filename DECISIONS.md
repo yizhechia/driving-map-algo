@@ -1,6 +1,6 @@
 # Map Algorithm — Decisions
 
-Updated: 2026-09-18. Offline MVP implemented, recovered to a feature branch, verified in CI and delivered on main. D013–D016 supersede earlier next-action statements for the current milestone.
+Updated: 2026-09-18. Offline MVP implemented, recovered to a feature branch, verified in CI and delivered on mvp/offline-commute. D013–D016 supersede earlier next-action statements for the current milestone.
 
 **Established** means required by the user's formal instructions or Work Mode handoff. **Proposed** means a concrete Stage 0 recommendation that has not yet been validated through implementation or the user's reasoning. **Deferred** means no selection has been made. A documented decision is not evidence that the user has mastered the concept.
 
@@ -136,3 +136,7 @@ Updated: 2026-09-18. Offline MVP implemented, recovered to a feature branch, ver
 - Use one workplace Dijkstra index and query all grid centres by default. At 256 queries, uniform sampling outperformed this adaptive rule across the fixed synthetic cases. Keep sparse methods experimental, with estimated/unknown coverage visible.
 - Avoid premature claims of universal superiority or actual API savings. Exact graph answers are a model reference, not measured commutes.
 - The workspace failure required reconstruction to branch mvp/offline-commute. That copy passed independent CI, including all 45 Python tests, browser interactions and package installation. Verification: https://github.com/yizhechia/driving-map-algo/actions/runs/35313293512.
+
+## D017 — Retain the verified MVP on its feature branch
+
+Automatic approval review rejected moving main because that promotion was not explicitly authorized. Keep the MVP on mvp/offline-commute and prepare a draft PR. Do not force, merge indirectly or retry the main update without explicit authorization. The feature branch is the concrete runnable deliverable.

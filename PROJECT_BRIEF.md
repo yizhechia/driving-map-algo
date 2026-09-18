@@ -1,6 +1,6 @@
 # Map Algorithm — Project Brief
 
-Updated: 2026-09-18. A preliminary offline MVP is delivered on main, with recovery history on mvp/offline-commute. Recovered-source CI passed for the offline implementation. The original traffic-aware V1 specification below remains a later target.
+Updated: 2026-09-18. A preliminary offline MVP is delivered on the feature branch mvp/offline-commute. Recovered-source CI passed for the offline implementation. The original traffic-aware V1 specification below remains a later target.
 
 ## Immediate MVP scope
 
